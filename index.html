@@ -1,0 +1,1079 @@
+<!-- For Firebase JS SDK v7.20.0 and later, measurementId is optional -->
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>PEDIAPAY TOPUP GAMES</title>
+  <!-- Add Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore-compat.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .banner-wrapper {
+      position: relative;
+      width: 100%;
+      border-radius: 10px;
+      overflow: hidden;
+      height: 100px; /* Increased banner height */
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .banner-container {
+      display: flex;
+      height: 100%;
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .banner-slide {
+      min-width: 100%;
+      flex-shrink: 0;
+      position: relative;
+    }
+    .banner-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .banner-slide::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 40%;
+      background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+    }
+    .banner-dots {
+      position: absolute;
+      bottom: 15px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      z-index: 10;
+    }
+    .banner-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.5);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .banner-dot.active {
+      background: white;
+      transform: scale(1.3);
+    }
+    .game-card {
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .game-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+    }
+    .nav-button {
+      transition: all 0.2s ease;
+    }
+    .nav-button.active {
+      color: #7B5FFF;
+      transform: scale(1.1);
+    }
+    .nav-button:active {
+      transform: scale(0.95);
+    }
+    .top-up-btn {
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 4px rgba(123, 95, 255, 0.3);
+    }
+    .top-up-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(123, 95, 255, 0.4);
+    }
+    .top-up-btn:active {
+      transform: translateY(0);
+    }
+    .discount-badge {
+      transition: all 0.2s ease;
+    }
+    .discount-badge:hover {
+      transform: scale(1.05);
+    }
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #3B2E7E;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #7B5FFF;
+      border-radius: 10px;
+    }
+    /* Modal styles */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      z-index: 100;
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background-color: #3B2E7E;
+      padding: 20px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 24px;
+      cursor: pointer;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 500;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #6B63B5;
+      background-color: #2B2360;
+      color: white;
+    }
+    .auth-tabs {
+      display: flex;
+      margin-bottom: 20px;
+    }
+    .auth-tab {
+      flex: 1;
+      text-align: center;
+      padding: 10px;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+    }
+    .auth-tab.active {
+      border-bottom: 2px solid #7B5FFF;
+      color: #7B5FFF;
+      font-weight: 600;
+    }
+    .error-message {
+      color: #FF5F7E;
+      font-size: 12px;
+      margin-top: 5px;
+      display: none;
+    }
+    .divider {
+      display: flex;
+      align-items: center;
+      margin: 15px 0;
+      color: #6B63B5;
+      font-size: 12px;
+    }
+    .divider::before, .divider::after {
+      content: "";
+      flex: 1;
+      border-bottom: 1px solid #6B63B5;
+      margin: 0 10px;
+    }
+    .social-login-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      background: #2B2360;
+      color: white;
+      font-weight: 500;
+      margin-bottom: 10px;
+      transition: all 0.2s ease;
+    }
+    .social-login-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    .social-login-btn i {
+      margin-right: 10px;
+      font-size: 18px;
+    }
+    .google-btn {
+      border: 1px solid #6B63B5;
+    }
+    .google-btn i {
+      color: #DB4437;
+    }
+    .auth-footer {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 13px;
+      color: #B9B9B9;
+    }
+    .auth-footer a {
+      color: #7B5FFF;
+      font-weight: 500;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body class="bg-[#2B2360] text-white min-h-screen flex flex-col">
+  <!-- Login/Register Modal -->
+  <div id="authModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" id="closeModal">&times;</span>
+      <div class="auth-tabs">
+        <div class="auth-tab active" id="loginTab">Login</div>
+        <div class="auth-tab" id="registerTab">Daftar</div>
+      </div>
+      
+      <!-- Login Form -->
+      <div id="loginForm">
+        <div class="form-group">
+          <label for="loginEmail">Email</label>
+          <input type="email" id="loginEmail" placeholder="Masukkan email Anda">
+          <div class="error-message" id="loginEmailError"></div>
+        </div>
+        <div class="form-group">
+          <label for="loginPassword">Password</label>
+          <input type="password" id="loginPassword" placeholder="Masukkan password Anda">
+          <div class="error-message" id="loginPasswordError"></div>
+        </div>
+        <button class="w-full bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md py-2 text-sm font-semibold mt-4" id="loginBtn">
+          Login
+        </button>
+        
+        <div class="divider">atau lanjutkan dengan</div>
+        
+        <!-- Social Login Buttons -->
+        <button class="social-login-btn google-btn" id="googleLoginBtn">
+          <i class="fab fa-google"></i>
+          Login dengan Google
+        </button>
+        
+        <div class="text-center mt-4 text-sm">
+          Lupa password? <a href="#" class="text-[#7B5FFF]" id="forgotPassword">Klik di sini</a>
+        </div>
+        
+        <div class="auth-footer">
+          Belum punya akun? <a href="#" id="switchToRegister">Daftar sekarang</a>
+        </div>
+      </div>
+      
+      <!-- Register Form -->
+      <div id="registerForm" style="display: none;">
+        <div class="form-group">
+          <label for="registerName">Nama Lengkap</label>
+          <input type="text" id="registerName" placeholder="Masukkan nama lengkap Anda">
+          <div class="error-message" id="registerNameError"></div>
+        </div>
+        <div class="form-group">
+          <label for="registerEmail">Email</label>
+          <input type="email" id="registerEmail" placeholder="Masukkan email Anda">
+          <div class="error-message" id="registerEmailError"></div>
+        </div>
+        <div class="form-group">
+          <label for="registerPhone">Nomor Telepon</label>
+          <input type="tel" id="registerPhone" placeholder="Masukkan nomor telepon">
+          <div class="error-message" id="registerPhoneError"></div>
+        </div>
+        <div class="form-group">
+          <label for="registerPassword">Password</label>
+          <input type="password" id="registerPassword" placeholder="Masukkan password (min. 6 karakter)">
+          <div class="error-message" id="registerPasswordError"></div>
+        </div>
+        <div class="form-group">
+          <label for="registerConfirmPassword">Konfirmasi Password</label>
+          <input type="password" id="registerConfirmPassword" placeholder="Konfirmasi password Anda">
+          <div class="error-message" id="registerConfirmPasswordError"></div>
+        </div>
+        <button class="w-full bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md py-2 text-sm font-semibold mt-4" id="registerBtn">
+          Daftar
+        </button>
+        
+        <div class="divider">atau daftar dengan</div>
+        
+        <!-- Social Register Buttons -->
+        <button class="social-login-btn google-btn" id="googleRegisterBtn">
+          <i class="fab fa-google"></i>
+          Daftar dengan Google
+        </button>
+        
+        <div class="auth-footer">
+          Sudah punya akun? <a href="#" id="switchToLogin">Login sekarang</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Account Info Modal -->
+  <div id="accountModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" id="closeAccountModal">&times;</span>
+      <h2 class="text-xl font-bold mb-4 text-center">Informasi Akun</h2>
+      <div id="accountInfo">
+        <!-- Account info will be loaded here -->
+      </div>
+      <button class="w-full bg-gradient-to-r from-[#FF5F7E] to-[#FF8A9B] rounded-md py-2 text-sm font-semibold mt-4" id="logoutBtn">
+        Logout
+      </button>
+    </div>
+  </div>
+
+  <!-- Rest of your HTML content remains the same -->
+  <div class="px-5 pt-5 pb-3 flex justify-between items-center bg-[#2B2360] sticky top-0 z-10">
+    <div class="flex items-center space-x-2">
+      <img alt="Pediapay logo" class="w-10 h-10 rounded-lg" src="https://files.catbox.moe/wstnsp.webp"/>
+      <span class="font-extrabold text-white text-xl select-none">PEDIAPAY</span>
+    </div>
+    <div class="flex items-center space-x-3">
+      <button class="p-2 rounded-full bg-[#3B2E7E] text-white relative">
+        <i class="fas fa-bell"></i>
+        <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
+      </button>
+      <button class="bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-lg px-4 py-2 text-white text-sm font-semibold shadow-lg" id="authButton">
+        Login/Daftar
+      </button>
+    </div>
+  </div>
+
+  <div class="px-5 space-y-4 flex-1 overflow-y-auto pb-24">
+    <!-- Search Bar -->
+    <div class="relative">
+      <input type="text" placeholder="Cari game, voucher, atau produk..." 
+             class="w-full bg-[#3B2E7E] rounded-xl py-3 px-4 pr-10 text-sm focus:outline-none focus:ring-2 focus:ring-[#7B5FFF] placeholder-[#6B63B5]">
+      <i class="fas fa-search absolute right-3 top-3 text-[#6B63B5]"></i>
+    </div>
+
+    <!-- Banner Section with Sliding Animation -->
+    <div class="banner-wrapper">
+      <div class="banner-container" id="bannerContainer">
+        <div class="banner-slide">
+          <img src="https://files.catbox.moe/ebhskj.jpg" alt="Banner 1">
+          <div class="absolute bottom-3 left-3 z-10 text-white text-sm font-bold">Promo Top Up Diskon 20%</div>
+        </div>
+        <div class="banner-slide">
+          <img src="https://files.catbox.moe/hgmk3d.jpg" alt="Banner 2">
+          <div class="absolute bottom-3 left-3 z-10 text-white text-sm font-bold">Event Spesial Bulan Ini</div>
+        </div>
+        <div class="banner-slide">
+          <img src="https://files.catbox.moe/i18860.jpg" alt="Banner 3">
+          <div class="absolute bottom-3 left-3 z-10 text-white text-sm font-bold">Game Baru Tersedia</div>
+        </div>
+        <div class="banner-slide">
+          <img src="https://files.catbox.moe/9h9gjs.jpg" alt="Banner 4">
+          <div class="absolute bottom-3 left-3 z-10 text-white text-sm font-bold">Bonus Diamond MLBB</div>
+        </div>
+        <div class="banner-slide">
+          <img src="https://files.catbox.moe/rl7wgh.jpg" alt="Banner 5">
+          <div class="absolute bottom-3 left-3 z-10 text-white text-sm font-bold">Voucher Gratis</div>
+        </div>
+        <div class="banner-slide">
+          <img src="https://files.catbox.moe/i8rk6z.jpg" alt="Banner 6">
+          <div class="absolute bottom-3 left-3 z-10 text-white text-sm font-bold">Cashback 10%</div>
+        </div>
+      </div>
+      <div class="banner-dots">
+        <div class="banner-dot active" data-slide="0"></div>
+        <div class="banner-dot" data-slide="1"></div>
+        <div class="banner-dot" data-slide="2"></div>
+        <div class="banner-dot" data-slide="3"></div>
+        <div class="banner-dot" data-slide="4"></div>
+        <div class="banner-dot" data-slide="5"></div>
+      </div>
+    </div>
+
+    <!-- Rest of your HTML content remains the same -->
+    <!-- Promo Categories -->
+    <div class="grid grid-cols-4 gap-3 pt-2">
+      <div class="bg-[#3B2E7E] rounded-xl p-2 flex flex-col items-center">
+        <div class="w-10 h-10 bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-full flex items-center justify-center mb-1">
+          <i class="fas fa-percentage text-white"></i>
+        </div>
+        <span class="text-xs text-center">Diskon</span>
+      </div>
+      <div class="bg-[#3B2E7E] rounded-xl p-2 flex flex-col items-center">
+        <div class="w-10 h-10 bg-gradient-to-r from-[#FF5F7E] to-[#FF8A9B] rounded-full flex items-center justify-center mb-1">
+          <i class="fas fa-gift text-white"></i>
+        </div>
+        <span class="text-xs text-center">Promo</span>
+      </div>
+      <div class="bg-[#3B2E7E] rounded-xl p-2 flex flex-col items-center">
+        <div class="w-10 h-10 bg-gradient-to-r from-[#5F8BFF] to-[#7FA9FF] rounded-full flex items-center justify-center mb-1">
+          <i class="fas fa-coins text-white"></i>
+        </div>
+        <span class="text-xs text-center">Cashback</span>
+      </div>
+      <div class="bg-[#3B2E7E] rounded-xl p-2 flex flex-col items-center">
+        <div class="w-10 h-10 bg-gradient-to-r from-[#5FFF8B] to-[#7FFFA9] rounded-full flex items-center justify-center mb-1">
+          <i class="fas fa-ticket-alt text-white"></i>
+        </div>
+        <span class="text-xs text-center">Voucher</span>
+      </div>
+    </div>
+
+    <div class="flex justify-between items-center mt-3">
+      <div>
+        <h2 class="text-[#6B63B5] font-semibold text-lg select-none">
+          Game <span class="font-bold text-white">Populer</span>
+        </h2>
+        <p class="text-[#6B63B5] text-sm select-none">
+          Game yang paling banyak di topup saat ini...
+        </p>
+      </div>
+      <button class="text-white text-xs font-semibold bg-[#3B2E7E] rounded-md px-3 py-1 flex items-center space-x-1 select-none hover:bg-[#4A3D8E] transition">
+        <span>Lihat Semua</span>
+        <i class="fas fa-arrow-up-right-from-square text-xs"></i>
+      </button>
+    </div>
+
+    <!-- Game Grid -->
+    <div class="grid grid-cols-2 gap-4">
+      <!-- Mobile Legends -->
+      <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2">
+        <div class="relative">
+          <img alt="Mobile Legends Bang Bang" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/q3s2it.png"/>
+          <div class="discount-badge absolute top-2 right-2 bg-gradient-to-r from-[#FF5F7E] to-[#FF8A9B] rounded-md px-2 py-0.5 text-xs font-semibold flex items-center space-x-1 select-none">
+            <i class="fas fa-gem text-white"></i>
+            <span class="text-white">-10%</span>
+          </div>
+          <div class="absolute bottom-2 left-2 bg-black bg-opacity-50 rounded-md px-2 py-0.5 text-xs">
+            <i class="fas fa-fire text-orange-400"></i>
+            <span class="text-white">Trending</span>
+          </div>
+        </div>
+        <h3 class="font-bold text-white text-sm select-none">
+          Mobile Legends
+        </h3>
+        <p class="text-[#B9B9B9] text-xs select-none">
+          Moonton
+        </p>
+        <button class="top-up-btn w-full bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md py-2 text-xs font-semibold" onclick="window.open('https://www.mobilelegends.com', '_blank')">
+          Top Up Sekarang
+        </button>
+      </div>
+
+      <!-- Genshin Impact -->
+      <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2">
+        <div class="relative">
+          <img alt="Genshin Impact game" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/6l0830.jpg"/>
+          <div class="discount-badge absolute top-2 right-2 bg-gradient-to-r from-[#FF5F7E] to-[#FF8A9B] rounded-md px-2 py-0.5 text-xs font-semibold flex items-center space-x-1 select-none">
+            <i class="fas fa-gem text-white"></i>
+            <span class="text-white">-15%</span>
+          </div>
+        </div>
+        <h3 class="font-bold text-white text-sm select-none">
+          Genshin Impact
+        </h3>
+        <p class="text-[#B9B9B9] text-xs select-none">
+          Hoyoverse
+        </p>
+        <button class="top-up-btn w-full bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md py-2 text-xs font-semibold" onclick="window.open('https://genshin.hoyoverse.com', '_blank')">
+          Top Up Sekarang
+        </button>
+      </div>
+
+      <!-- Free Fire -->
+      <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2">
+        <div class="relative">
+          <img alt="Free Fire" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/byekcx.jpg"/>
+          <div class="discount-badge absolute top-2 right-2 bg-gradient-to-r from-[#5F8BFF] to-[#7FA9FF] rounded-md px-2 py-0.5 text-xs font-semibold flex items-center space-x-1 select-none">
+            <i class="fas fa-gem text-white"></i>
+            <span class="text-white">-5%</span>
+          </div>
+        </div>
+        <h3 class="font-bold text-white text-sm select-none">
+          Free Fire
+        </h3>
+        <p class="text-[#B9B9B9] text-xs select-none">
+          Garena
+        </p>
+        <button class="top-up-btn w-full bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md py-2 text-xs font-semibold" onclick="window.open('https://ff.garena.com', '_blank')">
+          Top Up Sekarang
+        </button>
+      </div>
+
+      <!-- PUBG Mobile -->
+      <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2">
+        <div class="relative">
+          <img alt="PUBG Mobile" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/pgnf4o.jpg"/>
+          <div class="discount-badge absolute top-2 right-2 bg-gradient-to-r from-[#5F8BFF] to-[#7FA9FF] rounded-md px-2 py-0.5 text-xs font-semibold flex items-center space-x-1 select-none">
+            <i class="fas fa-gem text-white"></i>
+            <span class="text-white">-8%</span>
+          </div>
+        </div>
+        <h3 class="font-bold text-white text-sm select-none">
+          PUBG Mobile
+        </h3>
+        <p class="text-[#B9B9B9] text-xs select-none">
+          Tencent
+        </p>
+        <button class="top-up-btn w-full bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md py-2 text-xs font-semibold" onclick="window.open('https://pubgmobile.com', '_blank')">
+          Top Up Sekarang
+        </button>
+      </div>
+
+      <!-- Honor of Kings -->
+      <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2">
+        <div class="relative">
+          <img alt="Honor Of Kings" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/xiyt8w.png"/>
+          <div class="discount-badge absolute top-2 right-2 bg-gradient-to-r from-[#5FFF8B] to-[#7FFFA9] rounded-md px-2 py-0.5 text-xs font-semibold flex items-center space-x-1 select-none">
+            <i class="fas fa-gem text-white"></i>
+            <span class="text-white">-12%</span>
+          </div>
+        </div>
+        <h3 class="font-bold text-white text-sm select-none">
+          Honor of Kings
+        </h3>
+        <p class="text-[#B9B9B9] text-xs select-none">
+          Timi Studios
+        </p>
+        <button class="top-up-btn w-full bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md py-2 text-xs font-semibold" onclick="window.open('https://www.arenaofvalor.com', '_blank')">
+          Top Up Sekarang
+        </button>
+      </div>
+
+      <!-- Magic Chess -->
+      <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2">
+        <div class="relative">
+          <img alt="magic chess go go" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/kmq6c4.jpg"/>
+          <div class="discount-badge absolute top-2 right-2 bg-gradient-to-r from-[#5FFF8B] to-[#7FFFA9] rounded-md px-2 py-0.5 text-xs font-semibold flex items-center space-x-1 select-none">
+            <i class="fas fa-gem text-white"></i>
+            <span class="text-white">-7%</span>
+          </div>
+        </div>
+        <h3 class="font-bold text-white text-sm select-none">
+          Magic Chess
+        </h3>
+        <p class="text-[#B9B9B9] text-xs select-none">
+          Vizta Games
+        </p>
+        <button class="top-up-btn w-full bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md py-2 text-xs font-semibold" onclick="window.open('https://magicchess.com', '_blank')">
+          Top Up Sekarang
+        </button>
+      </div>
+
+      <!-- Free Fire MAX -->
+      <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2">
+        <div class="relative">
+          <img alt="Free Fire Max" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/js5s11.jpg"/>
+          <div class="discount-badge absolute top-2 right-2 bg-gradient-to-r from-[#FF5F7E] to-[#FF8A9B] rounded-md px-2 py-0.5 text-xs font-semibold flex items-center space-x-1 select-none">
+            <i class="fas fa-gem text-white"></i>
+            <span class="text-white">-10%</span>
+          </div>
+        </div>
+        <h3 class="font-bold text-white text-sm select-none">
+          Free Fire MAX
+        </h3>
+        <p class="text-[#B9B9B9] text-xs select-none">
+          Garena
+        </p>
+        <button class="top-up-btn w-full bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md py-2 text-xs font-semibold" onclick="window.open('https://ffmax.garena.com', '_blank')">
+          Top Up Sekarang
+        </button>
+      </div>
+
+      <!-- Honkai Star Rail -->
+      <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2">
+        <div class="relative">
+          <img alt="Honkai: star rail" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/go1xod.jpg"/>
+          <div class="discount-badge absolute top-2 right-2 bg-gradient-to-r from-[#FF5F7E] to-[#FF8A9B] rounded-md px-2 py-0.5 text-xs font-semibold flex items-center space-x-1 select-none">
+            <i class="fas fa-gem text-white"></i>
+            <span class="text-white">-15%</span>
+          </div>
+          <div class="absolute bottom-2 left-2 bg-black bg-opacity-50 rounded-md px-2 py-0.5 text-xs">
+            <i class="fas fa-star text-yellow-400"></i>
+            <span class="text-white">New</span>
+          </div>
+        </div>
+        <h3 class="font-bold text-white text-sm select-none">
+          Honkai Star Rail
+        </h3>
+        <p class="text-[#B9B9B9] text-xs select-none">
+          Hoyoverse
+        </p>
+        <button class="top-up-btn w-full bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md py-2 text-xs font-semibold" onclick="window.open('https://hsr.hoyoverse.com', '_blank')">
+          Top Up Sekarang
+        </button>
+      </div>
+      <!--EA SPORTS FC mobile-->
+      <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2">
+        <div class="relative">
+          <img alt="EA SPORTS FC mobile" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/0zm8gm.jpg"/>
+          <div class="discount-badge absolute top-2 right-2 bg-gradient-to-r from-[#FF5F7E] to-[#FF8A9B] rounded-md px-2 py-0.5 text-xs font-semibold flex items-center space-x-1 select-none">
+            <i class="fas fa-gem text-white"></i>
+            <span class="text-white">-15%</span>
+          </div>
+          <div class="absolute bottom-2 left-2 bg-black bg-opacity-50 rounded-md px-2 py-0.5 text-xs">
+            <i class="fas fa-star text-yellow-400"></i>
+            <span class="text-white">New</span>
+          </div>
+        </div>
+        <h3 class="font-bold text-white text-sm select-none">
+          EA SPORTS FC
+        </h3>
+        <p class="text-[#B9B9B9] text-xs select-none">
+          FC Games
+        </p>
+        <button class="top-up-btn w-full bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md py-2 text-xs font-semibold" onclick="window.open('https://hsr.hoyoverse.com', '_blank')">
+          Top Up Sekarang
+        </button>
+      </div>
+      <!--Clash of Clans-->
+      <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2">
+        <div class="relative">
+          <img alt="Clash of Clans" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/3vxnc0.jpg"/>
+          <div class="discount-badge absolute top-2 right-2 bg-gradient-to-r from-[#FF5F7E] to-[#FF8A9B] rounded-md px-2 py-0.5 text-xs font-semibold flex items-center space-x-1 select-none">
+            <i class="fas fa-gem text-white"></i>
+            <span class="text-white">-15%</span>
+          </div>
+          <div class="absolute bottom-2 left-2 bg-black bg-opacity-50 rounded-md px-2 py-0.5 text-xs">
+            <i class="fas fa-star text-yellow-400"></i>
+            <span class="text-white">New</span>
+          </div>
+        </div>
+        <h3 class="font-bold text-white text-sm select-none">
+          Clash of Clans
+        </h3>
+        <p class="text-[#B9B9B9] text-xs select-none">
+          Supercell
+        </p>
+        <button class="top-up-btn w-full bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md py-2 text-xs font-semibold" onclick="window.open('https://hsr.hoyoverse.com', '_blank')">
+          Top Up Sekarang
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Navigation -->
+  <nav class="fixed bottom-0 left-0 w-full bg-[#3B2E7E] border-t border-[#6B63B5] flex justify-around items-center py-3 text-xs font-semibold select-none">
+    <button class="nav-button active flex flex-col items-center text-[#7B5FFF]">
+      <i class="fas fa-home text-lg mb-1"></i>
+      <span>Home</span>
+    </button>
+    <button class="nav-button flex flex-col items-center text-[#B9B9B9]">
+      <i class="fas fa-gamepad text-lg mb-1"></i>
+      <span>Game</span>
+    </button>
+    <button class="nav-button flex flex-col items-center text-[#B9B9B9]">
+      <i class="fas fa-gem text-lg"></i>
+      <span>TopUp</span>
+    <button class="nav-button flex flex-col items-center text-[#B9B9B9]" id="accountButton">
+      <i class="fas fa-user text-lg mb-1"></i>
+      <span>Akun</span>
+    </button>
+  </nav>
+
+  <script>
+    // Initialize Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyA5LfKdQ3ThSh0h0yzwq8htedfYti_hbxQ",
+      authDomain: "pediapay-topup.firebaseapp.com",
+      projectId: "pediapay-topup",
+      storageBucket: "pediapay-topup.appspot.com",
+      messagingSenderId: "1008551355050",
+      appId: "1:1008551355050:web:abbb58878d9639656aa6d3",
+      measurementId: "G-26J59222HY"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+    
+    // Initialize Google Auth Provider
+    const provider = new firebase.auth.GoogleAuthProvider();
+
+    document.addEventListener('DOMContentLoaded', function() {
+      // Banner Slider
+      const container = document.getElementById('bannerContainer');
+      const dots = document.querySelectorAll('.banner-dot');
+      const slideCount = document.querySelectorAll('.banner-slide').length;
+      let currentIndex = 0;
+      let interval;
+
+      function goToSlide(index) {
+        currentIndex = (index + slideCount) % slideCount;
+        container.style.transform = `translateX(-${currentIndex * 100}%)`;
+        
+        // Update dots
+        dots.forEach((dot, i) => {
+          dot.classList.toggle('active', i === currentIndex);
+        });
+      }
+
+      function nextSlide() {
+        goToSlide(currentIndex + 1);
+      }
+
+      // Auto-scroll every 4 seconds
+      function startAutoScroll() {
+        interval = setInterval(nextSlide, 4000);
+      }
+
+      // Pause auto-scroll when hovering
+      container.addEventListener('mouseenter', () => clearInterval(interval));
+      container.addEventListener('mouseleave', startAutoScroll);
+
+      // Dot click handlers
+      dots.forEach(dot => {
+        dot.addEventListener('click', function() {
+          const slideIndex = parseInt(this.getAttribute('data-slide'));
+          goToSlide(slideIndex);
+        });
+      });
+
+      // Start auto-scroll
+      startAutoScroll();
+
+      // Navigation buttons
+      const navButtons = document.querySelectorAll('.nav-button');
+      navButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          navButtons.forEach(btn => btn.classList.remove('active', 'text-[#7B5FFF]'));
+          this.classList.add('active', 'text-[#7B5FFF]');
+        });
+      });
+
+      // Game card hover effect
+      const gameCards = document.querySelectorAll('.game-card');
+      gameCards.forEach(card => {
+        card.addEventListener('click', function() {
+          // Here you would typically navigate to a product page
+          console.log('Navigating to game details');
+        });
+      });
+
+      // Auth Modal Elements
+      const authModal = document.getElementById('authModal');
+      const closeModal = document.getElementById('closeModal');
+      const authButton = document.getElementById('authButton');
+      const loginTab = document.getElementById('loginTab');
+      const registerTab = document.getElementById('registerTab');
+      const loginForm = document.getElementById('loginForm');
+      const registerForm = document.getElementById('registerForm');
+      const loginBtn = document.getElementById('loginBtn');
+      const registerBtn = document.getElementById('registerBtn');
+      const forgotPassword = document.getElementById('forgotPassword');
+      const googleLoginBtn = document.getElementById('googleLoginBtn');
+      const googleRegisterBtn = document.getElementById('googleRegisterBtn');
+      const switchToRegister = document.getElementById('switchToRegister');
+      const switchToLogin = document.getElementById('switchToLogin');
+      
+      // Account Modal Elements
+      const accountModal = document.getElementById('accountModal');
+      const closeAccountModal = document.getElementById('closeAccountModal');
+      const accountButton = document.getElementById('accountButton');
+      const accountInfo = document.getElementById('accountInfo');
+      const logoutBtn = document.getElementById('logoutBtn');
+
+      // Show auth modal
+      authButton.addEventListener('click', () => {
+        authModal.style.display = 'flex';
+      });
+
+      // Close modals
+      closeModal.addEventListener('click', () => {
+        authModal.style.display = 'none';
+      });
+
+      closeAccountModal.addEventListener('click', () => {
+        accountModal.style.display = 'none';
+      });
+
+      // Switch between login and register tabs
+      loginTab.addEventListener('click', () => {
+        loginTab.classList.add('active');
+        registerTab.classList.remove('active');
+        loginForm.style.display = 'block';
+        registerForm.style.display = 'none';
+      });
+
+      registerTab.addEventListener('click', () => {
+        registerTab.classList.add('active');
+        loginTab.classList.remove('active');
+        registerForm.style.display = 'block';
+        loginForm.style.display = 'none';
+      });
+
+      // Switch between forms using footer links
+      switchToRegister.addEventListener('click', (e) => {
+        e.preventDefault();
+        registerTab.click();
+      });
+
+      switchToLogin.addEventListener('click', (e) => {
+        e.preventDefault();
+        loginTab.click();
+      });
+
+      // Account button click handler
+      accountButton.addEventListener('click', () => {
+        if (auth.currentUser) {
+          loadAccountInfo();
+          accountModal.style.display = 'flex';
+        } else {
+          authModal.style.display = 'flex';
+        }
+      });
+
+      // Google Login
+      function googleAuth() {
+        auth.signInWithPopup(provider)
+          .then((result) => {
+            // Check if user is new
+            const isNewUser = result.additionalUserInfo.isNewUser;
+            const user = result.user;
+            
+            if (isNewUser) {
+              // Save user data to Firestore
+              return db.collection('users').doc(user.uid).set({
+                name: user.displayName || 'User',
+                email: user.email,
+                phone: user.phoneNumber || '',
+                createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                balance: 0
+              });
+            }
+          })
+          .then(() => {
+            authModal.style.display = 'none';
+            authButton.textContent = 'Akun Saya';
+            alert('Login berhasil!');
+          })
+          .catch((error) => {
+            console.error('Google Auth Error:', error);
+            alert('Login dengan Google gagal: ' + error.message);
+          });
+      }
+
+      googleLoginBtn.addEventListener('click', googleAuth);
+      googleRegisterBtn.addEventListener('click', googleAuth);
+
+      // Forgot password
+      forgotPassword.addEventListener('click', (e) => {
+        e.preventDefault();
+        const email = document.getElementById('loginEmail').value;
+        
+        if (!email) {
+          showError('loginEmailError', 'Masukkan email Anda terlebih dahulu');
+          return;
+        }
+        
+        auth.sendPasswordResetEmail(email)
+          .then(() => {
+            alert('Email reset password telah dikirim. Silakan cek inbox Anda.');
+          })
+          .catch(error => {
+            showError('loginEmailError', error.message);
+          });
+      });
+
+      // Login function
+      loginBtn.addEventListener('click', () => {
+        const email = document.getElementById('loginEmail').value;
+        const password = document.getElementById('loginPassword').value;
+        
+        // Reset errors
+        hideError('loginEmailError');
+        hideError('loginPasswordError');
+        
+        // Validate inputs
+        if (!email) {
+          showError('loginEmailError', 'Email harus diisi');
+          return;
+        }
+        
+        if (!password) {
+          showError('loginPasswordError', 'Password harus diisi');
+          return;
+        }
+        
+        auth.signInWithEmailAndPassword(email, password)
+          .then((userCredential) => {
+            // Success
+            authModal.style.display = 'none';
+            authButton.textContent = 'Akun Saya';
+            alert('Login berhasil!');
+          })
+          .catch((error) => {
+            // Handle errors
+            if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
+              showError('loginPasswordError', 'Email atau password salah');
+            } else {
+              showError('loginPasswordError', error.message);
+            }
+          });
+      });
+
+      // Register function
+      registerBtn.addEventListener('click', () => {
+        const name = document.getElementById('registerName').value;
+        const email = document.getElementById('registerEmail').value;
+        const phone = document.getElementById('registerPhone').value;
+        const password = document.getElementById('registerPassword').value;
+        const confirmPassword = document.getElementById('registerConfirmPassword').value;
+        
+        // Reset errors
+        hideError('registerNameError');
+        hideError('registerEmailError');
+        hideError('registerPhoneError');
+        hideError('registerPasswordError');
+        hideError('registerConfirmPasswordError');
+        
+        // Validate inputs
+        if (!name) {
+          showError('registerNameError', 'Nama harus diisi');
+          return;
+        }
+        
+        if (!email) {
+          showError('registerEmailError', 'Email harus diisi');
+          return;
+        }
+        
+        if (!phone) {
+          showError('registerPhoneError', 'Nomor telepon harus diisi');
+          return;
+        }
+        
+        if (!password) {
+          showError('registerPasswordError', 'Password harus diisi');
+          return;
+        }
+        
+        if (password.length < 6) {
+          showError('registerPasswordError', 'Password minimal 6 karakter');
+          return;
+        }
+        
+        if (password !== confirmPassword) {
+          showError('registerConfirmPasswordError', 'Password tidak cocok');
+          return;
+        }
+        
+        // Create user
+        auth.createUserWithEmailAndPassword(email, password)
+          .then((userCredential) => {
+            // Save additional user data to Firestore
+            return db.collection('users').doc(userCredential.user.uid).set({
+              name: name,
+              email: email,
+              phone: phone,
+              createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+              balance: 0
+            });
+          })
+          .then(() => {
+            // Success
+            authModal.style.display = 'none';
+            authButton.textContent = 'Akun Saya';
+            alert('Pendaftaran berhasil!');
+          })
+          .catch((error) => {
+            // Handle errors
+            if (error.code === 'auth/email-already-in-use') {
+              showError('registerEmailError', 'Email sudah terdaftar');
+            } else {
+              showError('registerEmailError', error.message);
+            }
+          });
+      });
+
+      // Logout function
+      logoutBtn.addEventListener('click', () => {
+        auth.signOut()
+          .then(() => {
+            accountModal.style.display = 'none';
+            authButton.textContent = 'Login/Daftar';
+            alert('Anda telah logout');
+          })
+          .catch((error) => {
+            alert('Gagal logout: ' + error.message);
+          });
+      });
+
+      // Load account info
+      function loadAccountInfo() {
+        const user = auth.currentUser;
+        if (user) {
+          db.collection('users').doc(user.uid).get()
+            .then((doc) => {
+              if (doc.exists) {
+                const userData = doc.data();
+                accountInfo.innerHTML = `
+                  <div class="flex items-center justify-center mb-4">
+                    <div class="w-16 h-16 rounded-full bg-[#7B5FFF] flex items-center justify-center text-2xl font-bold">
+                      ${userData.name.charAt(0).toUpperCase()}
+                    </div>
+                  </div>
+                  <div class="space-y-2">
+                    <div class="flex justify-between">
+                      <span class="text-[#B9B9B9]">Nama:</span>
+                      <span class="font-medium">${userData.name}</span>
+                    </div>
+                    <div class="flex justify-between">
+                      <span class="text-[#B9B9B9]">Email:</span>
+                      <span class="font-medium">${user.email}</span>
+                    </div>
+                    <div class="flex justify-between">
+                      <span class="text-[#B9B9B9]">Telepon:</span>
+                      <span class="font-medium">${userData.phone || '-'}</span>
+                    </div>
+                    <div class="flex justify-between">
+                      <span class="text-[#B9B9B9]">Saldo:</span>
+                      <span class="font-medium text-[#7B5FFF]">Rp ${userData.balance?.toLocaleString() || '0'}</span>
+                    </div>
+                  </div>
+                `;
+              } else {
+                accountInfo.innerHTML = '<p>Data pengguna tidak ditemukan</p>';
+              }
+            })
+            .catch((error) => {
+              accountInfo.innerHTML = `<p class="text-red-500">Error: ${error.message}</p>`;
+            });
+        }
+      }
+
+      // Helper functions for error handling
+      function showError(elementId, message) {
+        const element = document.getElementById(elementId);
+        element.textContent = message;
+        element.style.display = 'block';
+      }
+
+      function hideError(elementId) {
+        const element = document.getElementById(elementId);
+        element.style.display = 'none';
+      }
+
+      // Check auth state
+      auth.onAuthStateChanged((user) => {
+        if (user) {
+          authButton.textContent = 'Akun Saya';
+        } else {
+          authButton.textContent = 'Login/Daftar';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
