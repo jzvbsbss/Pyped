@@ -1,8 +1,9 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
-  <title>PEDIAPAY TOPUP GAMES</title>
+  <title>PEDIAPAY TOPUP GAMES & PULSA</title>
   <!-- Add Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
@@ -20,7 +21,7 @@
       width: 100%;
       border-radius: 10px;
       overflow: hidden;
-      height: 120px;
+      height: 100px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
     .banner-container {
@@ -374,6 +375,55 @@
     .history-item:last-child {
       border-bottom: none;
     }
+    /* Category tabs */
+    .category-tabs-container {
+      display: flex;
+      overflow-x: auto;
+      padding-bottom: 10px;
+      margin-bottom: 15px;
+    }
+    .category-tab-main {
+      flex: 0 0 auto;
+      padding: 8px 16px;
+      margin-right: 8px;
+      border-radius: 20px;
+      background: #3B2E7E;
+      color: #B9B9B9;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .category-tab-main.active {
+      background: #7B5FFF;
+      color: white;
+    }
+    .category-section {
+      display: none;
+    }
+    .category-section.active {
+      display: block;
+    }
+    /* Pulsa provider badge */
+    .provider-badge {
+      position: absolute;
+      bottom: 2px;
+      left: 2px;
+      background: rgba(0,0,0,0.5);
+      border-radius: 4px;
+      padding: 2px 4px;
+      font-size: 10px;
+      display: flex;
+      align-items: center;
+    }
+    .provider-badge i {
+      margin-right: 3px;
+    }
+    .telkomsel { color: #00AEEF; }
+    .xl { color: #FF0000; }
+    .axis { color: #FFD700; }
+    .indosat { color: #FF6600; }
+    .smartfren { color: #FFCC00; }
+    .three { color: #00CC00; }
   </style>
 </head>
 <body class="bg-[#2B2360] text-white min-h-screen flex flex-col">
@@ -508,7 +558,7 @@
           <img src="https://files.catbox.moe/4k8b0v.png" alt="Gopay" class="w-8 h-8 mr-3">
           <div>
             <div class="font-medium">Gopay</div>
-            <div class="text-xs text-[#B9B9B9]">Biaya admin Rp 2.500</div>
+            <div class="text-xs text-[#B9B9B9]">Biaya admin Rp 1.500 (Instan)</div>
           </div>
         </div>
       </div>
@@ -518,7 +568,7 @@
           <img src="https://files.catbox.moe/5l5k5v.png" alt="OVO" class="w-8 h-8 mr-3">
           <div>
             <div class="font-medium">OVO</div>
-            <div class="text-xs text-[#B9B9B9]">Biaya admin Rp 2.500</div>
+            <div class="text-xs text-[#B9B9B9]">Biaya admin Rp 1.500 (Instan)</div>
           </div>
         </div>
       </div>
@@ -528,17 +578,47 @@
           <img src="https://files.catbox.moe/3vxnc0.png" alt="DANA" class="w-8 h-8 mr-3">
           <div>
             <div class="font-medium">DANA</div>
-            <div class="text-xs text-[#B9B9B9]">Biaya admin Rp 2.500</div>
+            <div class="text-xs text-[#B9B9B9]">Biaya admin Rp 1.500 (Instan)</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="payment-method" data-method="shopeepay">
+        <div class="flex items-center">
+          <img src="https://files.catbox.moe/8tlhg4.png" alt="ShopeePay" class="w-8 h-8 mr-3">
+          <div>
+            <div class="font-medium">ShopeePay</div>
+            <div class="text-xs text-[#B9B9B9]">Biaya admin Rp 0 (Instan)</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="payment-method" data-method="linkaja">
+        <div class="flex items-center">
+          <img src="https://files.catbox.moe/hgmk3d.png" alt="LinkAja" class="w-8 h-8 mr-3">
+          <div>
+            <div class="font-medium">LinkAja</div>
+            <div class="text-xs text-[#B9B9B9]">Biaya admin Rp 1.500 (Instan)</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="payment-method" data-method="qris">
+        <div class="flex items-center">
+          <img src="https://files.catbox.moe/i18860.png" alt="QRIS" class="w-8 h-8 mr-3">
+          <div>
+            <div class="font-medium">QRIS</div>
+            <div class="text-xs text-[#B9B9B9]">Biaya admin Rp 0 (Instan)</div>
           </div>
         </div>
       </div>
       
       <div class="payment-method" data-method="bank">
         <div class="flex items-center">
-          <img src="https://files.catbox.moe/8tlhg4.png" alt="Bank Transfer" class="w-8 h-8 mr-3">
+          <img src="https://files.catbox.moe/rl7wgh.png" alt="Bank Transfer" class="w-8 h-8 mr-3">
           <div>
             <div class="font-medium">Transfer Bank</div>
-            <div class="text-xs text-[#B9B9B9]">Biaya admin Rp 3.000</div>
+            <div class="text-xs text-[#B9B9B9]">Biaya admin Rp 2.500 (1-3 Jam)</div>
           </div>
         </div>
       </div>
@@ -582,7 +662,7 @@
         <button class="category-tab active" data-category="all">Semua</button>
         <button class="category-tab" data-category="topup">Top Up</button>
         <button class="category-tab" data-category="game">Game</button>
-        <button class="category-tab" data-category="voucher">Voucher</button>
+        <button class="category-tab" data-category="pulsa">Pulsa</button>
       </div>
       
       <div id="historyList">
@@ -595,37 +675,152 @@
     </div>
   </div>
 
-  <!-- Game Top-up Modal -->
-  <div id="gameTopupModal" class="modal">
-    <div class="modal-content">
-      <span class="close-btn" id="closeGameTopupModal">&times;</span>
-      <h2 class="text-xl font-bold mb-4 text-center" id="gameTopupTitle">Top Up Diamond Mobile Legends</h2>
-      
-      <div class="form-group">
-        <label for="gamePlayerId">ID Player</label>
-        <input type="text" id="gamePlayerId" placeholder="Masukkan ID Player">
-        <div class="error-message" id="gamePlayerIdError"></div>
-      </div>
-      
-      <div class="form-group">
-        <label for="gameServerId">Server ID (Opsional)</label>
-        <input type="text" id="gameServerId" placeholder="Masukkan Server ID">
-      </div>
-      
-      <div class="mt-3 mb-2 font-medium">Pilih Nominal</div>
-      
-      <div class="grid grid-cols-2 gap-3" id="topupOptions">
-        <!-- Top-up options will be loaded here -->
-      </div>
-      
-      <div class="error-message" id="topupOptionError" style="margin-top: 10px;"></div>
-      
-      <button class="w-full bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md py-2 text-sm font-semibold mt-4 flex items-center justify-center" id="confirmGameTopupBtn">
-        <span id="confirmGameTopupBtnText">Lanjutkan Pembayaran</span>
-        <div id="confirmGameTopupSpinner" class="spinner" style="display: none;"></div>
-      </button>
+<!-- Game Top-up Modal -->
+<div id="gameTopupModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" id="closeGameTopupModal">&times;</span>
+    <h2 class="text-xl font-bold mb-4 text-center" id="gameTopupTitle">Top Up Diamond Mobile Legends</h2>
+    
+    <div class="form-group">
+      <label for="gamePlayerId">ID Player</label>
+      <input type="text" id="gamePlayerId" placeholder="Masukkan ID Player">
+      <div class="error-message" id="gamePlayerIdError"></div>
     </div>
+    
+    <div class="form-group">
+      <label for="gameServerId">Server ID (Opsional)</label>
+      <input type="text" id="gameServerId" placeholder="Masukkan Server ID">
+    </div>
+    
+    <div class="mt-3 mb-2 font-medium">Pilih Nominal</div>
+    
+    <div class="grid grid-cols-2 gap-3" id="topupOptions">
+      <!-- Top-up options will be loaded here -->
+    </div>
+    
+    <div class="error-message" id="topupOptionError" style="margin-top: 10px;"></div>
+
+    <div class="mt-3 mb-2 font-medium">Metode Pembayaran</div>
+    
+    <div class="payment-method" data-method="saldo">
+      <div class="flex items-center">
+        <img src="https://files.catbox.moe/wstnsp.webp" alt="Saldo PediaPay" class="w-8 h-8 mr-3">
+        <div>
+          <div class="font-medium">Saldo PediaPay</div>
+          <div class="text-xs text-[#B9B9B9]">Gunakan saldo akun Anda</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="payment-method" data-method="dana">
+      <div class="flex items-center">
+        <img src="https://files.catbox.moe/3vxnc0.png" alt="DANA" class="w-8 h-8 mr-3">
+        <div>
+          <div class="font-medium">DANA</div>
+          <div class="text-xs text-[#B9B9B9]">Biaya admin Rp 1.500</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="payment-method" data-method="gopay">
+      <div class="flex items-center">
+        <img src="https://files.catbox.moe/4k8b0v.png" alt="Gopay" class="w-8 h-8 mr-3">
+        <div>
+          <div class="font-medium">Gopay</div>
+          <div class="text-xs text-[#B9B9B9]">Biaya admin Rp 1.500</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="payment-method" data-method="ovo">
+      <div class="flex items-center">
+        <img src="https://files.catbox.moe/5l5k5v.png" alt="OVO" class="w-8 h-8 mr-3">
+        <div>
+          <div class="font-medium">OVO</div>
+          <div class="text-xs text-[#B9B9B9]">Biaya admin Rp 1.500</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="error-message" id="gamePaymentMethodError" style="margin-top: 10px;"></div>
+    
+    <button class="w-full bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md py-2 text-sm font-semibold mt-4 flex items-center justify-center" id="confirmGameTopupBtn">
+      <span id="confirmGameTopupBtnText">Lanjutkan ke WhatsApp</span>
+      <div id="confirmGameTopupSpinner" class="spinner" style="display: none;"></div>
+    </button>
   </div>
+</div>
+
+<!-- Pulsa Top-up Modal -->
+<div id="pulsaTopupModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" id="closePulsaTopupModal">&times;</span>
+    <h2 class="text-xl font-bold mb-4 text-center" id="pulsaTopupTitle">Top Up Pulsa Telkomsel</h2>
+    
+    <div class="form-group">
+      <label for="pulsaPhoneNumber">Nomor Telepon</label>
+      <input type="tel" id="pulsaPhoneNumber" placeholder="Masukkan nomor telepon">
+      <div class="error-message" id="pulsaPhoneNumberError"></div>
+    </div>
+    
+    <div class="mt-3 mb-2 font-medium">Pilih Nominal</div>
+    
+    <div class="grid grid-cols-2 gap-3" id="pulsaOptions">
+      <!-- Pulsa options will be loaded here -->
+    </div>
+    
+    <div class="error-message" id="pulsaOptionError" style="margin-top: 10px;"></div>
+
+    <div class="mt-3 mb-2 font-medium">Metode Pembayaran</div>
+    
+    <div class="payment-method" data-method="saldo">
+      <div class="flex items-center">
+        <img src="https://files.catbox.moe/wstnsp.webp" alt="Saldo PediaPay" class="w-8 h-8 mr-3">
+        <div>
+          <div class="font-medium">Saldo PediaPay</div>
+          <div class="text-xs text-[#B9B9B9]">Gunakan saldo akun Anda</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="payment-method" data-method="dana">
+      <div class="flex items-center">
+        <img src="https://files.catbox.moe/3vxnc0.png" alt="DANA" class="w-8 h-8 mr-3">
+        <div>
+          <div class="font-medium">DANA</div>
+          <div class="text-xs text-[#B9B9B9]">Biaya admin Rp 1.500</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="payment-method" data-method="gopay">
+      <div class="flex items-center">
+        <img src="https://files.catbox.moe/4k8b0v.png" alt="Gopay" class="w-8 h-8 mr-3">
+        <div>
+          <div class="font-medium">Gopay</div>
+          <div class="text-xs text-[#B9B9B9]">Biaya admin Rp 1.500</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="payment-method" data-method="ovo">
+      <div class="flex items-center">
+        <img src="https://files.catbox.moe/5l5k5v.png" alt="OVO" class="w-8 h-8 mr-3">
+        <div>
+          <div class="font-medium">OVO</div>
+          <div class="text-xs text-[#B9B9B9]">Biaya admin Rp 1.500</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="error-message" id="pulsaPaymentMethodError" style="margin-top: 10px;"></div>
+    
+    <button class="w-full bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md py-2 text-sm font-semibold mt-4 flex items-center justify-center" id="confirmPulsaTopupBtn">
+      <span id="confirmPulsaTopupBtnText">Lanjutkan ke WhatsApp</span>
+      <div id="confirmPulsaTopupSpinner" class="spinner" style="display: none;"></div>
+    </button>
+  </div>
+</div>
 
   <div class="px-5 pt-5 pb-3 flex justify-between items-center bg-[#2B2360] sticky top-0 z-10">
     <div class="flex items-center space-x-2">
@@ -689,265 +884,770 @@
       </div>
     </div>
 
-    <!-- Promo Categories -->
-    <div class="grid grid-cols-4 gap-3 pt-2">
-      <div class="bg-[#3B2E7E] rounded-xl p-2 flex flex-col items-center">
-        <div class="w-10 h-10 bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-full flex items-center justify-center mb-1">
-          <i class="fas fa-percentage text-white"></i>
+    <!-- Category Tabs -->
+    <div class="category-tabs-container">
+      <button class="category-tab-main active" data-category="game">Game</button>
+      <button class="category-tab-main" data-category="pulsa">Pulsa</button>
+      <button class="category-tab-main" data-category="voucher">Voucher</button>
+      <button class="category-tab-main" data-category="paket-data">Paket Data</button>
+      <button class="category-tab-main" data-category="listrik">Listrik</button>
+    </div>
+
+    <!-- Game Category Section -->
+    <div class="category-section active" id="gameCategory">
+      <!-- Promo Categories -->
+      <div class="grid grid-cols-4 gap-3 pt-2">
+        <div class="bg-[#3B2E7E] rounded-xl p-2 flex flex-col items-center">
+          <div class="w-10 h-10 bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-full flex items-center justify-center mb-1">
+            <i class="fas fa-percentage text-white"></i>
+          </div>
+          <span class="text-xs text-center">Diskon</span>
         </div>
-        <span class="text-xs text-center">Diskon</span>
+        <div class="bg-[#3B2E7E] rounded-xl p-2 flex flex-col items-center">
+          <div class="w-10 h-10 bg-gradient-to-r from-[#FF5F7E] to-[#FF8A9B] rounded-full flex items-center justify-center mb-1">
+            <i class="fas fa-gift text-white"></i>
+          </div>
+          <span class="text-xs text-center">Promo</span>
+        </div>
+        <div class="bg-[#3B2E7E] rounded-xl p-2 flex flex-col items-center">
+          <div class="w-10 h-10 bg-gradient-to-r from-[#5F8BFF] to-[#7FA9FF] rounded-full flex items-center justify-center mb-1">
+            <i class="fas fa-coins text-white"></i>
+          </div>
+          <span class="text-xs text-center">Cashback</span>
+        </div>
+        <div class="bg-[#3B2E7E] rounded-xl p-2 flex flex-col items-center">
+          <div class="w-10 h-10 bg-gradient-to-r from-[#5FFF8B] to-[#7FFFA9] rounded-full flex items-center justify-center mb-1">
+            <i class="fas fa-ticket-alt text-white"></i>
+          </div>
+          <span class="text-xs text-center">Voucher</span>
+        </div>
       </div>
-      <div class="bg-[#3B2E7E] rounded-xl p-2 flex flex-col items-center">
-        <div class="w-10 h-10 bg-gradient-to-r from-[#FF5F7E] to-[#FF8A9B] rounded-full flex items-center justify-center mb-1">
-          <i class="fas fa-gift text-white"></i>
+
+      <div class="flex justify-between items-center mt-3">
+        <div>
+          <h2 class="text-[#6B63B5] font-semibold text-lg select-none">
+            Game <span class="font-bold text-white">Populer</span>
+          </h2>
+          <p class="text-[#6B63B5] text-sm select-none">
+            Game yang paling banyak di topup saat ini...
+          </p>
         </div>
-        <span class="text-xs text-center">Promo</span>
+        <button class="text-white text-xs font-semibold bg-[#3B2E7E] rounded-md px-3 py-1 flex items-center space-x-1 select-none hover:bg-[#4A3D8E] transition">
+          <span>Lihat Semua</span>
+          <i class="fas fa-arrow-up-right-from-square text-xs"></i>
+        </button>
       </div>
-      <div class="bg-[#3B2E7E] rounded-xl p-2 flex flex-col items-center">
-        <div class="w-10 h-10 bg-gradient-to-r from-[#5F8BFF] to-[#7FA9FF] rounded-full flex items-center justify-center mb-1">
-          <i class="fas fa-coins text-white"></i>
+
+      <!-- Game Grid -->
+      <div class="grid grid-cols-2 gap-4">
+        <!-- Mobile Legends -->
+        <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2">
+          <div class="relative">
+            <img alt="Mobile Legends Bang Bang" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/q3s2it.png"/>
+            <div class="discount-badge absolute top-2 right-2 bg-gradient-to-r from-[#FF5F7E] to-[#FF8A9B] rounded-md px-2 py-0.5 text-xs font-semibold flex items-center space-x-1 select-none">
+              <i class="fas fa-gem text-white"></i>
+              <span class="text-white">-10%</span>
+            </div>
+            <div class="absolute bottom-2 left-2 bg-black bg-opacity-50 rounded-md px-2 py-0.5 text-xs">
+              <i class="fas fa-fire text-orange-400"></i>
+              <span class="text-white">Trending</span>
+            </div>
+          </div>
+          <h3 class="font-bold text-white text-sm select-none">
+            Mobile Legends
+          </h3>
+          <p class="text-[#B9B9B9] text-xs select-none">
+            Moonton
+          </p>
+          <button class="top-up-btn w-full bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md py-2 text-xs font-semibold" data-game="Mobile Legends" data-game-id="mlbb">
+            Top Up Sekarang
+          </button>
         </div>
-        <span class="text-xs text-center">Cashback</span>
-      </div>
-      <div class="bg-[#3B2E7E] rounded-xl p-2 flex flex-col items-center">
-        <div class="w-10 h-10 bg-gradient-to-r from-[#5FFF8B] to-[#7FFFA9] rounded-full flex items-center justify-center mb-1">
-          <i class="fas fa-ticket-alt text-white"></i>
+
+        <!-- Genshin Impact -->
+        <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2">
+          <div class="relative">
+            <img alt="Genshin Impact game" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/6l0830.jpg"/>
+            <div class="discount-badge absolute top-2 right-2 bg-gradient-to-r from-[#FF5F7E] to-[#FF8A9B] rounded-md px-2 py-0.5 text-xs font-semibold flex items-center space-x-1 select-none">
+              <i class="fas fa-gem text-white"></i>
+              <span class="text-white">-15%</span>
+            </div>
+          </div>
+          <h3 class="font-bold text-white text-sm select-none">
+            Genshin Impact
+          </h3>
+          <p class="text-[#B9B9B9] text-xs select-none">
+            Hoyoverse
+          </p>
+          <button class="top-up-btn w-full bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md py-2 text-xs font-semibold" data-game="Genshin Impact" data-game-id="genshin">
+            Top Up Sekarang
+          </button>
         </div>
-        <span class="text-xs text-center">Voucher</span>
+
+        <!-- Free Fire -->
+        <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2">
+          <div class="relative">
+            <img alt="Free Fire" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/byekcx.jpg"/>
+            <div class="discount-badge absolute top-2 right-2 bg-gradient-to-r from-[#5F8BFF] to-[#7FA9FF] rounded-md px-2 py-0.5 text-xs font-semibold flex items-center space-x-1 select-none">
+              <i class="fas fa-gem text-white"></i>
+              <span class="text-white">-5%</span>
+            </div>
+          </div>
+          <h3 class="font-bold text-white text-sm select-none">
+            Free Fire
+          </h3>
+          <p class="text-[#B9B9B9] text-xs select-none">
+            Garena
+          </p>
+          <button class="top-up-btn w-full bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md py-2 text-xs font-semibold" data-game="Free Fire" data-game-id="freefire">
+            Top Up Sekarang
+          </button>
+        </div>
+
+        <!-- PUBG Mobile -->
+        <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2">
+          <div class="relative">
+            <img alt="PUBG Mobile" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/pgnf4o.jpg"/>
+            <div class="discount-badge absolute top-2 right-2 bg-gradient-to-r from-[#5F8BFF] to-[#7FA9FF] rounded-md px-2 py-0.5 text-xs font-semibold flex items-center space-x-1 select-none">
+              <i class="fas fa-gem text-white"></i>
+              <span class="text-white">-8%</span>
+            </div>
+          </div>
+          <h3 class="font-bold text-white text-sm select-none">
+            PUBG Mobile
+          </h3>
+          <p class="text-[#B9B9B9] text-xs select-none">
+            Tencent
+          </p>
+          <button class="top-up-btn w-full bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md py-2 text-xs font-semibold" data-game="PUBG Mobile" data-game-id="pubgm">
+            Top Up Sekarang
+          </button>
+        </div>
+
+        <!-- Honor of Kings -->
+        <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2">
+          <div class="relative">
+            <img alt="Honor Of Kings" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/xiyt8w.png"/>
+            <div class="discount-badge absolute top-2 right-2 bg-gradient-to-r from-[#5FFF8B] to-[#7FFFA9] rounded-md px-2 py-0.5 text-xs font-semibold flex items-center space-x-1 select-none">
+              <i class="fas fa-gem text-white"></i>
+              <span class="text-white">-12%</span>
+            </div>
+          </div>
+          <h3 class="font-bold text-white text-sm select-none">
+            Honor of Kings
+          </h3>
+          <p class="text-[#B9B9B9] text-xs select-none">
+            Timi Studios
+          </p>
+          <button class="top-up-btn w-full bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md py-2 text-xs font-semibold" data-game="Honor of Kings" data-game-id="honor">
+            Top Up Sekarang
+          </button>
+        </div>
+
+        <!-- Magic Chess -->
+        <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2">
+          <div class="relative">
+            <img alt="magic chess go go" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/kmq6c4.jpg"/>
+            <div class="discount-badge absolute top-2 right-2 bg-gradient-to-r from-[#5FFF8B] to-[#7FFFA9] rounded-md px-2 py-0.5 text-xs font-semibold flex items-center space-x-1 select-none">
+              <i class="fas fa-gem text-white"></i>
+              <span class="text-white">-7%</span>
+            </div>
+          </div>
+          <h3 class="font-bold text-white text-sm select-none">
+            Magic Chess
+          </h3>
+          <p class="text-[#B9B9B9] text-xs select-none">
+            Vizta Games
+          </p>
+          <button class="top-up-btn w-full bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md py-2 text-xs font-semibold" data-game="Magic Chess" data-game-id="magicchess">
+            Top Up Sekarang
+          </button>
+        </div>
+
+        <!-- Free Fire MAX -->
+        <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2">
+          <div class="relative">
+            <img alt="Free Fire Max" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/js5s11.jpg"/>
+            <div class="discount-badge absolute top-2 right-2 bg-gradient-to-r from-[#FF5F7E] to-[#FF8A9B] rounded-md px-2 py-0.5 text-xs font-semibold flex items-center space-x-1 select-none">
+              <i class="fas fa-gem text-white"></i>
+              <span class="text-white">-10%</span>
+            </div>
+          </div>
+          <h3 class="font-bold text-white text-sm select-none">
+            Free Fire MAX
+          </h3>
+          <p class="text-[#B9B9B9] text-xs select-none">
+            Garena
+          </p>
+          <button class="top-up-btn w-full bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md py-2 text-xs font-semibold" data-game="Free Fire MAX" data-game-id="freefiremax">
+            Top Up Sekarang
+          </button>
+        </div>
+
+        <!-- Honkai Star Rail -->
+        <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2">
+          <div class="relative">
+            <img alt="Honkai: star rail" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/go1xod.jpg"/>
+            <div class="discount-badge absolute top-2 right-2 bg-gradient-to-r from-[#FF5F7E] to-[#FF8A9B] rounded-md px-2 py-0.5 text-xs font-semibold flex items-center space-x-1 select-none">
+              <i class="fas fa-gem text-white"></i>
+              <span class="text-white">-15%</span>
+            </div>
+            <div class="absolute bottom-2 left-2 bg-black bg-opacity-50 rounded-md px-2 py-0.5 text-xs">
+              <i class="fas fa-star text-yellow-400"></i>
+              <span class="text-white">New</span>
+            </div>
+          </div>
+          <h3 class="font-bold text-white text-sm select-none">
+            Honkai Star Rail
+          </h3>
+          <p class="text-[#B9B9B9] text-xs select-none">
+            Hoyoverse
+          </p>
+          <button class="top-up-btn w-full bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md py-2 text-xs font-semibold" data-game="Honkai Star Rail" data-game-id="honkaistarrail">
+            Top Up Sekarang
+          </button>
+        </div>
+        
+        <!-- EA SPORTS FC mobile -->
+        <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2">
+          <div class="relative">
+            <img alt="EA SPORTS FC mobile" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/0zm8gm.jpg"/>
+            <div class="discount-badge absolute top-2 right-2 bg-gradient-to-r from-[#FF5F7E] to-[#FF8A9B] rounded-md px-2 py-0.5 text-xs font-semibold flex items-center space-x-1 select-none">
+              <i class="fas fa-gem text-white"></i>
+              <span class="text-white">-15%</span>
+            </div>
+            <div class="absolute bottom-2 left-2 bg-black bg-opacity-50 rounded-md px-2 py-0.5 text-xs">
+              <i class="fas fa-star text-yellow-400"></i>
+              <span class="text-white">New</span>
+            </div>
+          </div>
+          <h3 class="font-bold text-white text-sm select-none">
+            EA SPORTS FC
+          </h3>
+          <p class="text-[#B9B9B9] text-xs select-none">
+            FC Games
+          </p>
+          <button class="top-up-btn w-full bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md py-2 text-xs font-semibold" data-game="EA SPORTS FC" data-game-id="easportsfc">
+            Top Up Sekarang
+          </button>
+        </div>
+        
+        <!-- Clash of Clans -->
+        <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2">
+          <div class="relative">
+            <img alt="Clash of Clans" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/3vxnc0.jpg"/>
+            <div class="discount-badge absolute top-2 right-2 bg-gradient-to-r from-[#FF5F7E] to-[#FF8A9B] rounded-md px-2 py-0.5 text-xs font-semibold flex items-center space-x-1 select-none">
+              <i class="fas fa-gem text-white"></i>
+              <span class="text-white">-15%</span>
+            </div>
+            <div class="absolute bottom-2 left-2 bg-black bg-opacity-50 rounded-md px-2 py-0.5 text-xs">
+              <i class="fas fa-star text-yellow-400"></i>
+              <span class="text-white">New</span>
+            </div>
+          </div>
+          <h3 class="font-bold text-white text-sm select-none">
+            Clash of Clans
+          </h3>
+          <p class="text-[#B9B9B9] text-xs select-none">
+            Supercell
+          </p>
+          <button class="top-up-btn w-full bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md py-2 text-xs font-semibold" data-game="Clash of Clans" data-game-id="clashofclans">
+            Top Up Sekarang
+          </button>
+        </div>
       </div>
     </div>
 
-    <div class="flex justify-between items-center mt-3">
-      <div>
-        <h2 class="text-[#6B63B5] font-semibold text-lg select-none">
-          Game <span class="font-bold text-white">Populer</span>
-        </h2>
-        <p class="text-[#6B63B5] text-sm select-none">
-          Game yang paling banyak di topup saat ini...
-        </p>
-      </div>
-      <button class="text-white text-xs font-semibold bg-[#3B2E7E] rounded-md px-3 py-1 flex items-center space-x-1 select-none hover:bg-[#4A3D8E] transition">
-        <span>Lihat Semua</span>
-        <i class="fas fa-arrow-up-right-from-square text-xs"></i>
-      </button>
-    </div>
-
-    <!-- Game Grid -->
-    <div class="grid grid-cols-2 gap-4">
-      <!-- Mobile Legends -->
-      <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2">
-        <div class="relative">
-          <img alt="Mobile Legends Bang Bang" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/q3s2it.png"/>
-          <div class="discount-badge absolute top-2 right-2 bg-gradient-to-r from-[#FF5F7E] to-[#FF8A9B] rounded-md px-2 py-0.5 text-xs font-semibold flex items-center space-x-1 select-none">
-            <i class="fas fa-gem text-white"></i>
-            <span class="text-white">-10%</span>
-          </div>
-          <div class="absolute bottom-2 left-2 bg-black bg-opacity-50 rounded-md px-2 py-0.5 text-xs">
-            <i class="fas fa-fire text-orange-400"></i>
-            <span class="text-white">Trending</span>
-          </div>
+    <!-- Pulsa Category Section -->
+    <div class="category-section" id="pulsaCategory">
+      <div class="flex justify-between items-center mt-3">
+        <div>
+          <h2 class="text-[#6B63B5] font-semibold text-lg select-none">
+            Pulsa <span class="font-bold text-white">Murah</span>
+          </h2>
+          <p class="text-[#6B63B5] text-sm select-none">
+            Isi pulsa semua operator dengan harga spesial...
+          </p>
         </div>
-        <h3 class="font-bold text-white text-sm select-none">
-          Mobile Legends
-        </h3>
-        <p class="text-[#B9B9B9] text-xs select-none">
-          Moonton
-        </p>
-        <button class="top-up-btn w-full bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md py-2 text-xs font-semibold" data-game="Mobile Legends" data-game-id="mlbb">
-          Top Up Sekarang
+        <button class="text-white text-xs font-semibold bg-[#3B2E7E] rounded-md px-3 py-1 flex items-center space-x-1 select-none hover:bg-[#4A3D8E] transition">
+          <span>Lihat Semua</span>
+          <i class="fas fa-arrow-up-right-from-square text-xs"></i>
         </button>
       </div>
 
-      <!-- Genshin Impact -->
-      <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2">
-        <div class="relative">
-          <img alt="Genshin Impact game" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/6l0830.jpg"/>
-          <div class="discount-badge absolute top-2 right-2 bg-gradient-to-r from-[#FF5F7E] to-[#FF8A9B] rounded-md px-2 py-0.5 text-xs font-semibold flex items-center space-x-1 select-none">
-            <i class="fas fa-gem text-white"></i>
-            <span class="text-white">-15%</span>
-          </div>
-        </div>
-        <h3 class="font-bold text-white text-sm select-none">
-          Genshin Impact
-        </h3>
-        <p class="text-[#B9B9B9] text-xs select-none">
-          Hoyoverse
-        </p>
-        <button class="top-up-btn w-full bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md py-2 text-xs font-semibold" data-game="Genshin Impact" data-game-id="genshin">
-          Top Up Sekarang
-        </button>
+      <!-- Pulsa Provider Tabs -->
+      <div class="flex space-x-2 mb-4 overflow-x-auto pb-2">
+        <button class="category-tab active" data-provider="telkomsel">Telkomsel</button>
+        <button class="category-tab" data-provider="xl">XL</button>
+        <button class="category-tab" data-provider="indosat">Indosat</button>
+        <button class="category-tab" data-provider="axis">AXIS</button>
+        <button class="category-tab" data-provider="three">3</button>
+        <button class="category-tab" data-provider="smartfren">Smartfren</button>
       </div>
 
-      <!-- Free Fire -->
-      <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2">
-        <div class="relative">
-          <img alt="Free Fire" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/byekcx.jpg"/>
-          <div class="discount-badge absolute top-2 right-2 bg-gradient-to-r from-[#5F8BFF] to-[#7FA9FF] rounded-md px-2 py-0.5 text-xs font-semibold flex items-center space-x-1 select-none">
-            <i class="fas fa-gem text-white"></i>
-            <span class="text-white">-5%</span>
+      <!-- Pulsa Grid -->
+      <div class="grid grid-cols-2 gap-4 mt-4" id="pulsaGrid">
+        <!-- Telkomsel Pulsa -->
+        <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2" data-provider="telkomsel">
+          <div class="relative">
+            <img alt="Telkomsel Pulsa" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/66o02d.jpg"/>
+            <div class="provider-badge">
+              <i class="fas fa-sim-card telkomsel"></i>
+              <span class="text-white">Telkomsel</span>
+            </div>
+          </div>
+          <h3 class="font-bold text-white text-sm select-none">
+            Pulsa 5.000
+          </h3>
+          <div class="flex justify-between items-center">
+            <span class="text-sm text-[#7B5FFF] font-bold">Rp 6.000</span>
+            <button class="top-up-btn bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md px-3 py-1 text-xs font-semibold" data-pulsa="Pulsa 5.000" data-pulsa-id="telkomsel5k" data-price="6000" data-validity="3 hari">
+              Beli
+            </button>
           </div>
         </div>
-        <h3 class="font-bold text-white text-sm select-none">
-          Free Fire
-        </h3>
-        <p class="text-[#B9B9B9] text-xs select-none">
-          Garena
-        </p>
-        <button class="top-up-btn w-full bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md py-2 text-xs font-semibold" data-game="Free Fire" data-game-id="freefire">
-          Top Up Sekarang
-        </button>
-      </div>
 
-      <!-- PUBG Mobile -->
-      <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2">
-        <div class="relative">
-          <img alt="PUBG Mobile" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/pgnf4o.jpg"/>
-          <div class="discount-badge absolute top-2 right-2 bg-gradient-to-r from-[#5F8BFF] to-[#7FA9FF] rounded-md px-2 py-0.5 text-xs font-semibold flex items-center space-x-1 select-none">
-            <i class="fas fa-gem text-white"></i>
-            <span class="text-white">-8%</span>
+        <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2" data-provider="telkomsel">
+          <div class="relative">
+            <img alt="Telkomsel Pulsa" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/66o02d.jpg"/>
+            <div class="provider-badge">
+              <i class="fas fa-sim-card telkomsel"></i>
+              <span class="text-white">Telkomsel</span>
+            </div>
+          </div>
+          <h3 class="font-bold text-white text-sm select-none">
+            Pulsa 10.000
+          </h3>
+          <div class="flex justify-between items-center">
+            <span class="text-sm text-[#7B5FFF] font-bold">Rp 11.000</span>
+            <button class="top-up-btn bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md px-3 py-1 text-xs font-semibold" data-pulsa="Pulsa 10.000" data-pulsa-id="telkomsel10k" data-price="11000" data-validity="7 hari">
+              Beli
+            </button>
           </div>
         </div>
-        <h3 class="font-bold text-white text-sm select-none">
-          PUBG Mobile
-        </h3>
-        <p class="text-[#B9B9B9] text-xs select-none">
-          Tencent
-        </p>
-        <button class="top-up-btn w-full bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md py-2 text-xs font-semibold" data-game="PUBG Mobile" data-game-id="pubgm">
-          Top Up Sekarang
-        </button>
-      </div>
 
-      <!-- Honor of Kings -->
-      <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2">
-        <div class="relative">
-          <img alt="Honor Of Kings" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/xiyt8w.png"/>
-          <div class="discount-badge absolute top-2 right-2 bg-gradient-to-r from-[#5FFF8B] to-[#7FFFA9] rounded-md px-2 py-0.5 text-xs font-semibold flex items-center space-x-1 select-none">
-            <i class="fas fa-gem text-white"></i>
-            <span class="text-white">-12%</span>
+        <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2" data-provider="telkomsel">
+          <div class="relative">
+            <img alt="Telkomsel Pulsa" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/66o02d.jpg"/>
+            <div class="provider-badge">
+              <i class="fas fa-sim-card telkomsel"></i>
+              <span class="text-white">Telkomsel</span>
+            </div>
+          </div>
+          <h3 class="font-bold text-white text-sm select-none">
+            Pulsa 25.000
+          </h3>
+          <div class="flex justify-between items-center">
+            <span class="text-sm text-[#7B5FFF] font-bold">Rp 26.500</span>
+            <button class="top-up-btn bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md px-3 py-1 text-xs font-semibold" data-pulsa="Pulsa 25.000" data-pulsa-id="telkomsel25k" data-price="26500" data-validity="30 hari">
+              Beli
+            </button>
           </div>
         </div>
-        <h3 class="font-bold text-white text-sm select-none">
-          Honor of Kings
-        </h3>
-        <p class="text-[#B9B9B9] text-xs select-none">
-          Timi Studios
-        </p>
-        <button class="top-up-btn w-full bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md py-2 text-xs font-semibold" data-game="Honor of Kings" data-game-id="honor">
-          Top Up Sekarang
-        </button>
-      </div>
 
-      <!-- Magic Chess -->
-      <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2">
-        <div class="relative">
-          <img alt="magic chess go go" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/kmq6c4.jpg"/>
-          <div class="discount-badge absolute top-2 right-2 bg-gradient-to-r from-[#5FFF8B] to-[#7FFFA9] rounded-md px-2 py-0.5 text-xs font-semibold flex items-center space-x-1 select-none">
-            <i class="fas fa-gem text-white"></i>
-            <span class="text-white">-7%</span>
+        <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2" data-provider="telkomsel">
+          <div class="relative">
+            <img alt="Telkomsel Pulsa" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/66o02d.jpg"/>
+            <div class="provider-badge">
+              <i class="fas fa-sim-card telkomsel"></i>
+              <span class="text-white">Telkomsel</span>
+            </div>
+          </div>
+          <h3 class="font-bold text-white text-sm select-none">
+            Pulsa 50.000
+          </h3>
+          <div class="flex justify-between items-center">
+            <span class="text-sm text-[#7B5FFF] font-bold">Rp 51.500</span>
+            <button class="top-up-btn bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md px-3 py-1 text-xs font-semibold" data-pulsa="Pulsa 50.000" data-pulsa-id="telkomsel50k" data-price="51500" data-validity="60 hari">
+              Beli
+            </button>
           </div>
         </div>
-        <h3 class="font-bold text-white text-sm select-none">
-          Magic Chess
-        </h3>
-        <p class="text-[#B9B9B9] text-xs select-none">
-          Vizta Games
-        </p>
-        <button class="top-up-btn w-full bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md py-2 text-xs font-semibold" data-game="Magic Chess" data-game-id="magicchess">
-          Top Up Sekarang
-        </button>
-      </div>
 
-      <!-- Free Fire MAX -->
-      <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2">
-        <div class="relative">
-          <img alt="Free Fire Max" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/js5s11.jpg"/>
-          <div class="discount-badge absolute top-2 right-2 bg-gradient-to-r from-[#FF5F7E] to-[#FF8A9B] rounded-md px-2 py-0.5 text-xs font-semibold flex items-center space-x-1 select-none">
-            <i class="fas fa-gem text-white"></i>
-            <span class="text-white">-10%</span>
+        <!-- XL Pulsa -->
+        <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2" data-provider="xl">
+          <div class="relative">
+            <img alt="XL Pulsa" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/jaowdn.jpg"/>
+            <div class="provider-badge">
+              <i class="fas fa-sim-card xl"></i>
+              <span class="text-white">XL</span>
+            </div>
+          </div>
+          <h3 class="font-bold text-white text-sm select-none">
+            Pulsa 5.000
+          </h3>
+          <div class="flex justify-between items-center">
+            <span class="text-sm text-[#7B5FFF] font-bold">Rp 6.500</span>
+            <button class="top-up-btn bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md px-3 py-1 text-xs font-semibold" data-pulsa="Pulsa 5.000" data-pulsa-id="xl5k" data-price="6500" data-validity="3 hari">
+              Beli
+            </button>
           </div>
         </div>
-        <h3 class="font-bold text-white text-sm select-none">
-          Free Fire MAX
-        </h3>
-        <p class="text-[#B9B9B9] text-xs select-none">
-          Garena
-        </p>
-        <button class="top-up-btn w-full bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md py-2 text-xs font-semibold" data-game="Free Fire MAX" data-game-id="freefiremax">
-          Top Up Sekarang
-        </button>
-      </div>
 
-      <!-- Honkai Star Rail -->
-      <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2">
-        <div class="relative">
-          <img alt="Honkai: star rail" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/go1xod.jpg"/>
-          <div class="discount-badge absolute top-2 right-2 bg-gradient-to-r from-[#FF5F7E] to-[#FF8A9B] rounded-md px-2 py-0.5 text-xs font-semibold flex items-center space-x-1 select-none">
-            <i class="fas fa-gem text-white"></i>
-            <span class="text-white">-15%</span>
+        <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2" data-provider="xl">
+          <div class="relative">
+            <img alt="XL Pulsa" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/jaowdn.jpg"/>
+            <div class="provider-badge">
+              <i class="fas fa-sim-card xl"></i>
+              <span class="text-white">XL</span>
+            </div>
           </div>
-          <div class="absolute bottom-2 left-2 bg-black bg-opacity-50 rounded-md px-2 py-0.5 text-xs">
-            <i class="fas fa-star text-yellow-400"></i>
-            <span class="text-white">New</span>
-          </div>
-        </div>
-        <h3 class="font-bold text-white text-sm select-none">
-          Honkai Star Rail
-        </h3>
-        <p class="text-[#B9B9B9] text-xs select-none">
-          Hoyoverse
-        </p>
-        <button class="top-up-btn w-full bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md py-2 text-xs font-semibold" data-game="Honkai Star Rail" data-game-id="honkaistarrail">
-          Top Up Sekarang
-        </button>
-      </div>
-      
-      <!-- EA SPORTS FC mobile -->
-      <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2">
-        <div class="relative">
-          <img alt="EA SPORTS FC mobile" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/0zm8gm.jpg"/>
-          <div class="discount-badge absolute top-2 right-2 bg-gradient-to-r from-[#FF5F7E] to-[#FF8A9B] rounded-md px-2 py-0.5 text-xs font-semibold flex items-center space-x-1 select-none">
-            <i class="fas fa-gem text-white"></i>
-            <span class="text-white">-15%</span>
-          </div>
-          <div class="absolute bottom-2 left-2 bg-black bg-opacity-50 rounded-md px-2 py-0.5 text-xs">
-            <i class="fas fa-star text-yellow-400"></i>
-            <span class="text-white">New</span>
+          <h3 class="font-bold text-white text-sm select-none">
+            Pulsa 10.000
+          </h3>
+          <div class="flex justify-between items-center">
+            <span class="text-sm text-[#7B5FFF] font-bold">Rp 11.500</span>
+            <button class="top-up-btn bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md px-3 py-1 text-xs font-semibold" data-pulsa="Pulsa 10.000" data-pulsa-id="xl10k" data-price="11500" data-validity="7 hari">
+              Beli
+            </button>
           </div>
         </div>
-        <h3 class="font-bold text-white text-sm select-none">
-          EA SPORTS FC
-        </h3>
-        <p class="text-[#B9B9B9] text-xs select-none">
-          FC Games
-        </p>
-        <button class="top-up-btn w-full bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md py-2 text-xs font-semibold" data-game="EA SPORTS FC" data-game-id="easportsfc">
-          Top Up Sekarang
-        </button>
-      </div>
-      
-      <!-- Clash of Clans -->
-      <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2">
-        <div class="relative">
-          <img alt="Clash of Clans" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/3vxnc0.jpg"/>
-          <div class="discount-badge absolute top-2 right-2 bg-gradient-to-r from-[#FF5F7E] to-[#FF8A9B] rounded-md px-2 py-0.5 text-xs font-semibold flex items-center space-x-1 select-none">
-            <i class="fas fa-gem text-white"></i>
-            <span class="text-white">-15%</span>
+
+        <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2" data-provider="xl">
+          <div class="relative">
+            <img alt="XL Pulsa" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/jaowdn.jpg"/>
+            <div class="provider-badge">
+              <i class="fas fa-sim-card xl"></i>
+              <span class="text-white">XL</span>
+            </div>
           </div>
-          <div class="absolute bottom-2 left-2 bg-black bg-opacity-50 rounded-md px-2 py-0.5 text-xs">
-            <i class="fas fa-star text-yellow-400"></i>
-            <span class="text-white">New</span>
+          <h3 class="font-bold text-white text-sm select-none">
+            Pulsa 25.000
+          </h3>
+          <div class="flex justify-between items-center">
+            <span class="text-sm text-[#7B5FFF] font-bold">Rp 27.000</span>
+            <button class="top-up-btn bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md px-3 py-1 text-xs font-semibold" data-pulsa="Pulsa 25.000" data-pulsa-id="xl25k" data-price="27000" data-validity="30 hari">
+              Beli
+            </button>
           </div>
         </div>
-        <h3 class="font-bold text-white text-sm select-none">
-          Clash of Clans
-        </h3>
-        <p class="text-[#B9B9B9] text-xs select-none">
-          Supercell
-        </p>
-        <button class="top-up-btn w-full bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md py-2 text-xs font-semibold" data-game="Clash of Clans" data-game-id="clashofclans">
-          Top Up Sekarang
-        </button>
+
+        <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2" data-provider="xl">
+          <div class="relative">
+            <img alt="XL Pulsa" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/jaowdn.jpg"/>
+            <div class="provider-badge">
+              <i class="fas fa-sim-card xl"></i>
+              <span class="text-white">XL</span>
+            </div>
+          </div>
+          <h3 class="font-bold text-white text-sm select-none">
+            Pulsa 50.000
+          </h3>
+          <div class="flex justify-between items-center">
+            <span class="text-sm text-[#7B5FFF] font-bold">Rp 52.000</span>
+            <button class="top-up-btn bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md px-3 py-1 text-xs font-semibold" data-pulsa="Pulsa 50.000" data-pulsa-id="xl50k" data-price="52000" data-validity="60 hari">
+              Beli
+            </button>
+          </div>
+        </div>
+
+        <!-- Indosat Pulsa -->
+        <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2" data-provider="indosat">
+          <div class="relative">
+            <img alt="Indosat Pulsa" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/ek3rb6.jpg"/>
+            <div class="provider-badge">
+              <i class="fas fa-sim-card indosat"></i>
+              <span class="text-white">Indosat</span>
+            </div>
+          </div>
+          <h3 class="font-bold text-white text-sm select-none">
+            Pulsa 5.000
+          </h3>
+          <div class="flex justify-between items-center">
+            <span class="text-sm text-[#7B5FFF] font-bold">Rp 6.200</span>
+            <button class="top-up-btn bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md px-3 py-1 text-xs font-semibold" data-pulsa="Pulsa 5.000" data-pulsa-id="indosat5k" data-price="6200" data-validity="3 hari">
+              Beli
+            </button>
+          </div>
+        </div>
+
+        <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2" data-provider="indosat">
+          <div class="relative">
+            <img alt="Indosat Pulsa" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/ek3rb6.jpg"/>
+            <div class="provider-badge">
+              <i class="fas fa-sim-card indosat"></i>
+              <span class="text-white">Indosat</span>
+            </div>
+          </div>
+          <h3 class="font-bold text-white text-sm select-none">
+            Pulsa 10.000
+          </h3>
+          <div class="flex justify-between items-center">
+            <span class="text-sm text-[#7B5FFF] font-bold">Rp 11.200</span>
+            <button class="top-up-btn bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md px-3 py-1 text-xs font-semibold" data-pulsa="Pulsa 10.000" data-pulsa-id="indosat10k" data-price="11200" data-validity="7 hari">
+              Beli
+            </button>
+          </div>
+        </div>
+
+        <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2" data-provider="indosat">
+          <div class="relative">
+            <img alt="Indosat Pulsa" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/ek3rb6.jpg"/>
+            <div class="provider-badge">
+              <i class="fas fa-sim-card indosat"></i>
+              <span class="text-white">Indosat</span>
+            </div>
+          </div>
+          <h3 class="font-bold text-white text-sm select-none">
+            Pulsa 25.000
+          </h3>
+          <div class="flex justify-between items-center">
+            <span class="text-sm text-[#7B5FFF] font-bold">Rp 26.200</span>
+            <button class="top-up-btn bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md px-3 py-1 text-xs font-semibold" data-pulsa="Pulsa 25.000" data-pulsa-id="indosat25k" data-price="26200" data-validity="30 hari">
+              Beli
+            </button>
+          </div>
+        </div>
+
+        <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2" data-provider="indosat">
+          <div class="relative">
+            <img alt="Indosat Pulsa" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/ek3rb6.jpg"/>
+            <div class="provider-badge">
+              <i class="fas fa-sim-card indosat"></i>
+              <span class="text-white">Indosat</span>
+            </div>
+          </div>
+          <h3 class="font-bold text-white text-sm select-none">
+            Pulsa 50.000
+          </h3>
+          <div class="flex justify-between items-center">
+            <span class="text-sm text-[#7B5FFF] font-bold">Rp 51.200</span>
+            <button class="top-up-btn bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md px-3 py-1 text-xs font-semibold" data-pulsa="Pulsa 50.000" data-pulsa-id="indosat50k" data-price="51200" data-validity="60 hari">
+              Beli
+            </button>
+          </div>
+        </div>
+
+        <!-- AXIS Pulsa -->
+        <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2" data-provider="axis">
+          <div class="relative">
+            <img alt="AXIS Pulsa" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/2sk9m1.jpg"/>
+            <div class="provider-badge">
+              <i class="fas fa-sim-card axis"></i>
+              <span class="text-white">AXIS</span>
+            </div>
+          </div>
+          <h3 class="font-bold text-white text-sm select-none">
+            Pulsa 5.000
+          </h3>
+          <div class="flex justify-between items-center">
+            <span class="text-sm text-[#7B5FFF] font-bold">Rp 6.300</span>
+            <button class="top-up-btn bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md px-3 py-1 text-xs font-semibold" data-pulsa="Pulsa 5.000" data-pulsa-id="axis5k" data-price="6300" data-validity="3 hari">
+              Beli
+            </button>
+          </div>
+        </div>
+
+        <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2" data-provider="axis">
+          <div class="relative">
+            <img alt="AXIS Pulsa" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/2sk9m1.jpg"/>
+            <div class="provider-badge">
+              <i class="fas fa-sim-card axis"></i>
+              <span class="text-white">AXIS</span>
+            </div>
+          </div>
+          <h3 class="font-bold text-white text-sm select-none">
+            Pulsa 10.000
+          </h3>
+          <div class="flex justify-between items-center">
+            <span class="text-sm text-[#7B5FFF] font-bold">Rp 11.300</span>
+            <button class="top-up-btn bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md px-3 py-1 text-xs font-semibold" data-pulsa="Pulsa 10.000" data-pulsa-id="axis10k" data-price="11300" data-validity="7 hari">
+              Beli
+            </button>
+          </div>
+        </div>
+
+        <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2" data-provider="axis">
+          <div class="relative">
+            <img alt="AXIS Pulsa" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/2sk9m1.jpg"/>
+            <div class="provider-badge">
+              <i class="fas fa-sim-card axis"></i>
+              <span class="text-white">AXIS</span>
+            </div>
+          </div>
+          <h3 class="font-bold text-white text-sm select-none">
+            Pulsa 25.000
+          </h3>
+          <div class="flex justify-between items-center">
+            <span class="text-sm text-[#7B5FFF] font-bold">Rp 26.300</span>
+            <button class="top-up-btn bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md px-3 py-1 text-xs font-semibold" data-pulsa="Pulsa 25.000" data-pulsa-id="axis25k" data-price="26300" data-validity="30 hari">
+              Beli
+            </button>
+          </div>
+        </div>
+
+        <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2" data-provider="axis">
+          <div class="relative">
+            <img alt="AXIS Pulsa" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/2sk9m1.jpg"/>
+            <div class="provider-badge">
+              <i class="fas fa-sim-card axis"></i>
+              <span class="text-white">AXIS</span>
+            </div>
+          </div>
+          <h3 class="font-bold text-white text-sm select-none">
+            Pulsa 50.000
+          </h3>
+          <div class="flex justify-between items-center">
+            <span class="text-sm text-[#7B5FFF] font-bold">Rp 51.300</span>
+            <button class="top-up-btn bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md px-3 py-1 text-xs font-semibold" data-pulsa="Pulsa 50.000" data-pulsa-id="axis50k" data-price="51300" data-validity="60 hari">
+              Beli
+            </button>
+          </div>
+        </div>
+
+        <!-- Three Pulsa -->
+        <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2" data-provider="three">
+          <div class="relative">
+            <img alt="Three Pulsa" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/xetdv1.jpg"/>
+            <div class="provider-badge">
+              <i class="fas fa-sim-card three"></i>
+              <span class="text-white">3</span>
+            </div>
+          </div>
+          <h3 class="font-bold text-white text-sm select-none">
+            Pulsa 5.000
+          </h3>
+          <div class="flex justify-between items-center">
+            <span class="text-sm text-[#7B5FFF] font-bold">Rp 6.400</span>
+            <button class="top-up-btn bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md px-3 py-1 text-xs font-semibold" data-pulsa="Pulsa 5.000" data-pulsa-id="three5k" data-price="6400" data-validity="3 hari">
+              Beli
+            </button>
+          </div>
+        </div>
+
+        <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2" data-provider="three">
+          <div class="relative">
+            <img alt="Three Pulsa" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/xetdv1.jpg"/>
+            <div class="provider-badge">
+              <i class="fas fa-sim-card three"></i>
+              <span class="text-white">3</span>
+            </div>
+          </div>
+          <h3 class="font-bold text-white text-sm select-none">
+            Pulsa 10.000
+          </h3>
+          <div class="flex justify-between items-center">
+            <span class="text-sm text-[#7B5FFF] font-bold">Rp 11.400</span>
+            <button class="top-up-btn bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md px-3 py-1 text-xs font-semibold" data-pulsa="Pulsa 10.000" data-pulsa-id="three10k" data-price="11400" data-validity="7 hari">
+              Beli
+            </button>
+          </div>
+        </div>
+
+        <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2" data-provider="three">
+          <div class="relative">
+            <img alt="Three Pulsa" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/xetdv1.jpg"/>
+            <div class="provider-badge">
+              <i class="fas fa-sim-card three"></i>
+              <span class="text-white">3</span>
+            </div>
+          </div>
+          <h3 class="font-bold text-white text-sm select-none">
+            Pulsa 25.000
+          </h3>
+          <div class="flex justify-between items-center">
+            <span class="text-sm text-[#7B5FFF] font-bold">Rp 26.400</span>
+            <button class="top-up-btn bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md px-3 py-1 text-xs font-semibold" data-pulsa="Pulsa 25.000" data-pulsa-id="three25k" data-price="26400" data-validity="30 hari">
+              Beli
+            </button>
+          </div>
+        </div>
+
+        <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2" data-provider="three">
+          <div class="relative">
+            <img alt="Three Pulsa" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/xetdv1.jpg"/>
+            <div class="provider-badge">
+              <i class="fas fa-sim-card three"></i>
+              <span class="text-white">3</span>
+            </div>
+          </div>
+          <h3 class="font-bold text-white text-sm select-none">
+            Pulsa 50.000
+          </h3>
+          <div class="flex justify-between items-center">
+            <span class="text-sm text-[#7B5FFF] font-bold">Rp 51.400</span>
+            <button class="top-up-btn bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md px-3 py-1 text-xs font-semibold" data-pulsa="Pulsa 50.000" data-pulsa-id="three50k" data-price="51400" data-validity="60 hari">
+              Beli
+            </button>
+          </div>
+        </div>
+
+        <!-- Smartfren Pulsa -->
+        <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2" data-provider="smartfren">
+          <div class="relative">
+            <img alt="Smartfren Pulsa" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/113y6h.jpg"/>
+            <div class="provider-badge">
+              <i class="fas fa-sim-card smartfren"></i>
+              <span class="text-white">Smartfren</span>
+            </div>
+          </div>
+          <h3 class="font-bold text-white text-sm select-none">
+            Pulsa 5.000
+          </h3>
+          <div class="flex justify-between items-center">
+            <span class="text-sm text-[#7B5FFF] font-bold">Rp 6.500</span>
+            <button class="top-up-btn bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md px-3 py-1 text-xs font-semibold" data-pulsa="Pulsa 5.000" data-pulsa-id="smartfren5k" data-price="6500" data-validity="3 hari">
+              Beli
+            </button>
+          </div>
+        </div>
+
+        <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2" data-provider="smartfren">
+          <div class="relative">
+            <img alt="Smartfren Pulsa" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/113y6h.jpg"/>
+            <div class="provider-badge">
+              <i class="fas fa-sim-card smartfren"></i>
+              <span class="text-white">Smartfren</span>
+            </div>
+          </div>
+          <h3 class="font-bold text-white text-sm select-none">
+            Pulsa 10.000
+          </h3>
+          <div class="flex justify-between items-center">
+            <span class="text-sm text-[#7B5FFF] font-bold">Rp 11.500</span>
+            <button class="top-up-btn bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md px-3 py-1 text-xs font-semibold" data-pulsa="Pulsa 10.000" data-pulsa-id="smartfren10k" data-price="11500" data-validity="7 hari">
+              Beli
+            </button>
+          </div>
+        </div>
+
+        <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2" data-provider="smartfren">
+          <div class="relative">
+            <img alt="Smartfren Pulsa" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/113y6h.jpg"/>
+            <div class="provider-badge">
+              <i class="fas fa-sim-card smartfren"></i>
+              <span class="text-white">Smartfren</span>
+            </div>
+          </div>
+          <h3 class="font-bold text-white text-sm select-none">
+            Pulsa 25.000
+          </h3>
+          <div class="flex justify-between items-center">
+            <span class="text-sm text-[#7B5FFF] font-bold">Rp 26.500</span>
+            <button class="top-up-btn bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md px-3 py-1 text-xs font-semibold" data-pulsa="Pulsa 25.000" data-pulsa-id="smartfren25k" data-price="26500" data-validity="30 hari">
+              Beli
+            </button>
+          </div>
+        </div>
+
+        <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2" data-provider="smartfren">
+          <div class="relative">
+            <img alt="Smartfren Pulsa" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/113y6h.jpg"/>
+            <div class="provider-badge">
+              <i class="fas fa-sim-card smartfren"></i>
+              <span class="text-white">Smartfren</span>
+            </div>
+          </div>
+          <h3 class="font-bold text-white text-sm select-none">
+            Pulsa 50.000
+          </h3>
+          <div class="flex justify-between items-center">
+            <span class="text-sm text-[#7B5FFF] font-bold">Rp 51.500</span>
+            <button class="top-up-btn bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md px-3 py-1 text-xs font-semibold" data-pulsa="Pulsa 50.000" data-pulsa-id="smartfren50k" data-price="51500" data-validity="60 hari">
+              Beli
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -963,8 +1663,8 @@
       <span>Game</span>
     </button>
     <button class="nav-button flex flex-col items-center text-[#B9B9B9]">
-      <i class="fas fa-gem text-lg mb-1"></i>
-      <span>TopUp</span>
+      <i class="fas fa-mobile-alt text-lg mb-1"></i>
+      <span>Pulsa</span>
     </button>
     <button class="nav-button flex flex-col items-center text-[#B9B9B9]" id="accountButton">
       <i class="fas fa-user text-lg mb-1"></i>
@@ -1074,6 +1774,53 @@
       ]
     };
 
+    // Pulsa options
+    const pulsaOptions = {
+      telkomsel: [
+        { amount: 5000, price: 6000, validity: '3 hari' },
+        { amount: 10000, price: 11000, validity: '7 hari' },
+        { amount: 25000, price: 26500, validity: '30 hari' },
+        { amount: 50000, price: 51500, validity: '60 hari' },
+        { amount: 100000, price: 101000, validity: '120 hari' },
+        { amount: 200000, price: 200500, validity: '180 hari' }
+      ],
+      xl: [
+        { amount: 5000, price: 6500, validity: '3 hari' },
+        { amount: 10000, price: 11500, validity: '7 hari' },
+        { amount: 25000, price: 27000, validity: '30 hari' },
+        { amount: 50000, price: 52000, validity: '60 hari' },
+        { amount: 100000, price: 102000, validity: '120 hari' }
+      ],
+      indosat: [
+        { amount: 5000, price: 6200, validity: '3 hari' },
+        { amount: 10000, price: 11200, validity: '7 hari' },
+        { amount: 25000, price: 26200, validity: '30 hari' },
+        { amount: 50000, price: 51200, validity: '60 hari' },
+        { amount: 100000, price: 101200, validity: '120 hari' }
+      ],
+      axis: [
+        { amount: 5000, price: 6300, validity: '3 hari' },
+        { amount: 10000, price: 11300, validity: '7 hari' },
+        { amount: 25000, price: 26300, validity: '30 hari' },
+        { amount: 50000, price: 51300, validity: '60 hari' },
+        { amount: 100000, price: 101300, validity: '120 hari' }
+      ],
+      three: [
+        { amount: 5000, price: 6400, validity: '3 hari' },
+        { amount: 10000, price: 11400, validity: '7 hari' },
+        { amount: 25000, price: 26400, validity: '30 hari' },
+        { amount: 50000, price: 51400, validity: '60 hari' },
+        { amount: 100000, price: 101400, validity: '120 hari' }
+      ],
+      smartfren: [
+        { amount: 5000, price: 6500, validity: '3 hari' },
+        { amount: 10000, price: 11500, validity: '7 hari' },
+        { amount: 25000, price: 26500, validity: '30 hari' },
+        { amount: 50000, price: 51500, validity: '60 hari' },
+        { amount: 100000, price: 101500, validity: '120 hari' }
+      ]
+    };
+
     document.addEventListener('DOMContentLoaded', function() {
       // Banner Slider
       const container = document.getElementById('bannerContainer');
@@ -1125,12 +1872,48 @@
         });
       });
 
-      // Game card hover effect
-      const gameCards = document.querySelectorAll('.game-card');
-      gameCards.forEach(card => {
-        card.addEventListener('click', function() {
-          // Here you would typically navigate to a product page
-          console.log('Navigating to game details');
+      // Category tabs
+      const categoryTabs = document.querySelectorAll('.category-tab-main');
+      const categorySections = document.querySelectorAll('.category-section');
+      
+      categoryTabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+          const category = this.getAttribute('data-category');
+          
+          // Update active tab
+          categoryTabs.forEach(t => t.classList.remove('active'));
+          this.classList.add('active');
+          
+          // Show corresponding section
+          categorySections.forEach(section => {
+            section.classList.remove('active');
+            if (section.id === `${category}Category`) {
+              section.classList.add('active');
+            }
+          });
+        });
+      });
+
+      // Pulsa provider tabs
+      const providerTabs = document.querySelectorAll('#pulsaCategory .category-tab');
+      const pulsaCards = document.querySelectorAll('#pulsaGrid .game-card');
+      
+      providerTabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+          const provider = this.getAttribute('data-provider');
+          
+          // Update active tab
+          providerTabs.forEach(t => t.classList.remove('active'));
+          this.classList.add('active');
+          
+          // Show corresponding pulsa cards
+          pulsaCards.forEach(card => {
+            if (provider === 'all' || card.getAttribute('data-provider') === provider) {
+              card.style.display = 'block';
+            } else {
+              card.style.display = 'none';
+            }
+          });
         });
       });
 
@@ -1153,7 +1936,6 @@
       // Account Modal Elements
       const accountModal = document.getElementById('accountModal');
       const closeAccountModal = document.getElementById('closeAccountModal');
-      const accountButton = document.getElementById('accountButton');
       const accountInfo = document.getElementById('accountInfo');
       const logoutBtn = document.getElementById('logoutBtn');
       const topupBalanceBtn = document.getElementById('topupBalanceBtn');
@@ -1188,6 +1970,14 @@
       const topupOptions = document.getElementById('topupOptions');
       const confirmGameTopupBtn = document.getElementById('confirmGameTopupBtn');
       
+      // Pulsa Top-up Modal Elements
+      const pulsaTopupModal = document.getElementById('pulsaTopupModal');
+      const closePulsaTopupModal = document.getElementById('closePulsaTopupModal');
+      const pulsaTopupTitle = document.getElementById('pulsaTopupTitle');
+      const pulsaPhoneNumber = document.getElementById('pulsaPhoneNumber');
+      const pulsaOptionsContainer = document.getElementById('pulsaOptions');
+      const confirmPulsaTopupBtn = document.getElementById('confirmPulsaTopupBtn');
+      
       // Notification button
       const notificationBtn = document.getElementById('notificationBtn');
       const notificationBadge = document.getElementById('notificationBadge');
@@ -1195,8 +1985,13 @@
       // Selected payment method and top-up option
       let selectedPaymentMethod = null;
       let selectedTopupOption = null;
+      let selectedPulsaOption = null;
       let currentGameId = null;
-      
+      let currentPulsaId = null;
+      let selectedGamePaymentMethod = null;
+      let selectedPulsaPaymentMethod = null;
+      let currentPulsaProvider = 'telkomsel';
+
       // Show toast notification
       function showToast(message, type = 'success') {
         const icon = type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle';
@@ -1239,6 +2034,10 @@
 
       closeGameTopupModal.addEventListener('click', () => {
         gameTopupModal.style.display = 'none';
+      });
+
+      closePulsaTopupModal.addEventListener('click', () => {
+        pulsaTopupModal.style.display = 'none';
       });
 
       // Switch between login and register tabs
@@ -1321,9 +2120,11 @@
         }
         
         // Calculate admin fee based on payment method
-        let adminFee = 2500; // Default for e-wallets
+        let adminFee = 1500; // Default for most e-wallets
         if (selectedPaymentMethod === 'bank') {
-          adminFee = 3000;
+          adminFee = 2500;
+        } else if (selectedPaymentMethod === 'shopeepay' || selectedPaymentMethod === 'qris') {
+          adminFee = 0;
         }
         
         const total = amount + adminFee;
@@ -1418,7 +2219,7 @@
       });
 
       // Game top-up buttons
-      document.querySelectorAll('.top-up-btn').forEach(button => {
+      document.querySelectorAll('.top-up-btn[data-game]').forEach(button => {
         button.addEventListener('click', function() {
           const gameName = this.getAttribute('data-game');
           const gameId = this.getAttribute('data-game-id');
@@ -1467,7 +2268,81 @@
         });
       });
 
-      // Confirm game top-up
+      // Pulsa top-up buttons
+      document.querySelectorAll('.top-up-btn[data-pulsa]').forEach(button => {
+        button.addEventListener('click', function() {
+          const pulsaName = this.getAttribute('data-pulsa');
+          const pulsaId = this.getAttribute('data-pulsa-id');
+          const price = this.getAttribute('data-price');
+          const validity = this.getAttribute('data-validity');
+          
+          if (!auth.currentUser) {
+            showToast('Anda harus login terlebih dahulu', 'error');
+            authModal.style.display = 'flex';
+            return;
+          }
+          
+          // Determine provider from pulsaId
+          let provider = 'Telkomsel';
+          if (pulsaId.includes('xl')) provider = 'XL';
+          else if (pulsaId.includes('indosat')) provider = 'Indosat';
+          else if (pulsaId.includes('axis')) provider = 'AXIS';
+          else if (pulsaId.includes('three')) provider = '3';
+          else if (pulsaId.includes('smartfren')) provider = 'Smartfren';
+          
+          currentPulsaId = pulsaId;
+          currentPulsaProvider = provider.toLowerCase();
+          pulsaTopupTitle.textContent = `Top Up Pulsa ${provider}`;
+          
+          // Load pulsa options
+          pulsaOptionsContainer.innerHTML = '';
+          const options = pulsaOptions[currentPulsaProvider] || [];
+          
+          options.forEach((option, index) => {
+            const optionElement = document.createElement('div');
+            optionElement.className = 'topup-item';
+            optionElement.setAttribute('data-index', index);
+            
+            optionElement.innerHTML = `
+              <div class="font-medium">Pulsa Rp ${option.amount.toLocaleString()}</div>
+              <div class="text-sm text-[#B9B9B9]">Rp ${option.price.toLocaleString()}</div>
+              <div class="text-xs text-[#7B5FFF] mt-1">Masa aktif: ${option.validity}</div>
+            `;
+            
+            optionElement.addEventListener('click', function() {
+              document.querySelectorAll('.topup-item').forEach(item => {
+                item.classList.remove('selected');
+              });
+              this.classList.add('selected');
+              selectedPulsaOption = option;
+            });
+            
+            pulsaOptionsContainer.appendChild(optionElement);
+          });
+          
+          pulsaTopupModal.style.display = 'flex';
+        });
+      });
+
+      // Add payment method selection for game top-up
+      document.querySelectorAll('#gameTopupModal .payment-method').forEach(method => {
+        method.addEventListener('click', function() {
+          document.querySelectorAll('#gameTopupModal .payment-method').forEach(m => m.classList.remove('selected'));
+          this.classList.add('selected');
+          selectedGamePaymentMethod = this.getAttribute('data-method');
+        });
+      });
+
+      // Add payment method selection for pulsa top-up
+      document.querySelectorAll('#pulsaTopupModal .payment-method').forEach(method => {
+        method.addEventListener('click', function() {
+          document.querySelectorAll('#pulsaTopupModal .payment-method').forEach(m => m.classList.remove('selected'));
+          this.classList.add('selected');
+          selectedPulsaPaymentMethod = this.getAttribute('data-method');
+        });
+      });
+
+      // Update the confirmGameTopupBtn click handler
       confirmGameTopupBtn.addEventListener('click', () => {
         const playerId = gamePlayerId.value;
         
@@ -1480,6 +2355,11 @@
           showError('topupOptionError', 'Pilih nominal top-up');
           return;
         }
+
+        if (!selectedGamePaymentMethod) {
+          showError('gamePaymentMethodError', 'Pilih metode pembayaran');
+          return;
+        }
         
         const user = auth.currentUser;
         if (!user) {
@@ -1489,65 +2369,223 @@
           return;
         }
         
-        // Check user balance
-        db.collection('users').doc(user.uid).get()
-          .then(doc => {
-            if (doc.exists) {
-              const currentBalance = doc.data().balance || 0;
-              const price = selectedTopupOption.price;
-              
-              if (currentBalance < price) {
-                showToast('Saldo tidak cukup, silakan top up terlebih dahulu', 'error');
-                gameTopupModal.style.display = 'none';
-                topupModal.style.display = 'flex';
-                return;
-              }
-              
-              // Deduct balance
-              const newBalance = currentBalance - price;
-              
-              showLoading(confirmGameTopupBtn, 'Memproses...');
-              
-              return db.collection('users').doc(user.uid).update({
-                balance: newBalance
-              }).then(() => {
-                // Record transaction
-                return db.collection('transactions').add({
-                  userId: user.uid,
-                  type: 'game',
-                  gameId: currentGameId,
-                  gameName: gameTopupTitle.textContent.replace('Top Up ', ''),
-                  playerId: playerId,
-                  serverId: gameServerId.value || '',
-                  amount: selectedTopupOption.amount,
-                  price: price,
-                  status: 'completed',
-                  createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        // Calculate total price
+        let totalPrice = selectedTopupOption.price;
+        let adminFee = 0;
+        
+        if (selectedGamePaymentMethod !== 'saldo') {
+          adminFee = 1500; // Admin fee for non-balance payments
+          totalPrice += adminFee;
+        }
+        
+        // Check balance if using saldo
+        if (selectedGamePaymentMethod === 'saldo') {
+          db.collection('users').doc(user.uid).get()
+            .then(doc => {
+              if (doc.exists) {
+                const currentBalance = doc.data().balance || 0;
+                
+                if (currentBalance < totalPrice) {
+                  showToast('Saldo tidak cukup, silakan top up terlebih dahulu', 'error');
+                  gameTopupModal.style.display = 'none';
+                  topupModal.style.display = 'flex';
+                  return;
+                }
+                
+                // Deduct balance
+                const newBalance = currentBalance - totalPrice;
+                
+                showLoading(confirmGameTopupBtn, 'Memproses...');
+                
+                return db.collection('users').doc(user.uid).update({
+                  balance: newBalance
+                }).then(() => {
+                  // Record transaction
+                  return db.collection('transactions').add({
+                    userId: user.uid,
+                    type: 'game',
+                    gameId: currentGameId,
+                    gameName: gameTopupTitle.textContent.replace('Top Up ', ''),
+                    playerId: playerId,
+                    serverId: gameServerId.value || '',
+                    amount: selectedTopupOption.amount,
+                    price: selectedTopupOption.price,
+                    adminFee: adminFee,
+                    total: totalPrice,
+                    method: selectedGamePaymentMethod,
+                    status: 'completed',
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                  });
                 });
-              });
-            }
-          })
-          .then(() => {
-            gameTopupModal.style.display = 'none';
-            showToast('Top up game berhasil!', 'success');
-            loadAccountInfo(); // Refresh account info
-            
-            // Reset form
-            gamePlayerId.value = '';
-            gameServerId.value = '';
-            document.querySelectorAll('.topup-item').forEach(item => {
-              item.classList.remove('selected');
+              }
+            })
+            .then(() => {
+              sendGameWhatsAppMessage();
+            })
+            .catch(error => {
+              console.error('Error processing game top-up:', error);
+              showToast('Gagal memproses top up game', 'error');
+            })
+            .finally(() => {
+              hideLoading(confirmGameTopupBtn, 'Lanjutkan ke WhatsApp');
             });
-            selectedTopupOption = null;
-          })
-          .catch(error => {
-            console.error('Error processing game top-up:', error);
-            showToast('Gagal memproses top up game', 'error');
-          })
-          .finally(() => {
-            hideLoading(confirmGameTopupBtn, 'Lanjutkan Pembayaran');
-          });
+        } else {
+          // For non-saldo payments, just send WhatsApp message
+          sendGameWhatsAppMessage();
+        }
       });
+
+      function sendGameWhatsAppMessage() {
+        // Redirect to WhatsApp
+        const gameName = gameTopupTitle.textContent.replace('Top Up ', '');
+        const message = `Halo, saya ingin top up ${gameName}:\n\n` +
+                       `- ID Player: ${gamePlayerId.value}\n` +
+                       (gameServerId.value ? `- Server ID: ${gameServerId.value}\n` : '') +
+                       `- Nominal: ${selectedTopupOption.amount} ${currentGameId === 'genshin' || currentGameId === 'honkaistarrail' ? 'Genesis Crystals' : 'Diamond'}\n` +
+                       `- Harga: Rp ${selectedTopupOption.price.toLocaleString()}\n` +
+                       `- Metode pembayaran: ${selectedGamePaymentMethod}\n\n` +
+                       `Silakan konfirmasi pesanan ini. Terima kasih.`;
+        
+        const whatsappUrl = `https://wa.me/6281327138819?text=${encodeURIComponent(message)}`;
+        window.open(whatsappUrl, '_blank');
+        
+        gameTopupModal.style.display = 'none';
+        showToast('Pesanan telah dikirim ke WhatsApp', 'success');
+        loadAccountInfo(); // Refresh account info
+        
+        // Reset form
+        gamePlayerId.value = '';
+        gameServerId.value = '';
+        document.querySelectorAll('.topup-item').forEach(item => {
+          item.classList.remove('selected');
+        });
+        document.querySelectorAll('#gameTopupModal .payment-method').forEach(item => {
+          item.classList.remove('selected');
+        });
+        selectedTopupOption = null;
+        selectedGamePaymentMethod = null;
+      }
+
+      // Similarly update the pulsa top-up handler
+      confirmPulsaTopupBtn.addEventListener('click', () => {
+        const phoneNumber = pulsaPhoneNumber.value;
+        
+        if (!phoneNumber) {
+          showError('pulsaPhoneNumberError', 'Masukkan nomor telepon');
+          return;
+        }
+        
+        if (!selectedPulsaOption) {
+          showError('pulsaOptionError', 'Pilih nominal pulsa');
+          return;
+        }
+
+        if (!selectedPulsaPaymentMethod) {
+          showError('pulsaPaymentMethodError', 'Pilih metode pembayaran');
+          return;
+        }
+        
+        const user = auth.currentUser;
+        if (!user) {
+          showToast('Anda harus login terlebih dahulu', 'error');
+          pulsaTopupModal.style.display = 'none';
+          authModal.style.display = 'flex';
+          return;
+        }
+        
+        // Calculate total price
+        let totalPrice = selectedPulsaOption.price;
+        let adminFee = 0;
+        
+        if (selectedPulsaPaymentMethod !== 'saldo') {
+          adminFee = 1500; // Admin fee for non-balance payments
+          totalPrice += adminFee;
+        }
+        
+        // Check balance if using saldo
+        if (selectedPulsaPaymentMethod === 'saldo') {
+          db.collection('users').doc(user.uid).get()
+            .then(doc => {
+              if (doc.exists) {
+                const currentBalance = doc.data().balance || 0;
+                
+                if (currentBalance < totalPrice) {
+                  showToast('Saldo tidak cukup, silakan top up terlebih dahulu', 'error');
+                  pulsaTopupModal.style.display = 'none';
+                  topupModal.style.display = 'flex';
+                  return;
+                }
+                
+                // Deduct balance
+                const newBalance = currentBalance - totalPrice;
+                
+                showLoading(confirmPulsaTopupBtn, 'Memproses...');
+                
+                return db.collection('users').doc(user.uid).update({
+                  balance: newBalance
+                }).then(() => {
+                  // Record transaction
+                  return db.collection('transactions').add({
+                    userId: user.uid,
+                    type: 'pulsa',
+                    provider: currentPulsaProvider,
+                    phoneNumber: phoneNumber,
+                    amount: selectedPulsaOption.amount,
+                    price: selectedPulsaOption.price,
+                    adminFee: adminFee,
+                    total: totalPrice,
+                    validity: selectedPulsaOption.validity,
+                    method: selectedPulsaPaymentMethod,
+                    status: 'completed',
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                  });
+                });
+              }
+            })
+            .then(() => {
+              sendPulsaWhatsAppMessage();
+            })
+            .catch(error => {
+              console.error('Error processing pulsa top-up:', error);
+              showToast('Gagal memproses top up pulsa', 'error');
+            })
+            .finally(() => {
+              hideLoading(confirmPulsaTopupBtn, 'Lanjutkan ke WhatsApp');
+            });
+        } else {
+          // For non-saldo payments, just send WhatsApp message
+          sendPulsaWhatsAppMessage();
+        }
+      });
+
+      function sendPulsaWhatsAppMessage() {
+        // Redirect to WhatsApp
+        const message = `Halo, saya ingin top up pulsa ${currentPulsaProvider}:\n\n` +
+                       `- Nomor Telepon: ${pulsaPhoneNumber.value}\n` +
+                       `- Nominal: Rp ${selectedPulsaOption.amount.toLocaleString()}\n` +
+                       `- Harga: Rp ${selectedPulsaOption.price.toLocaleString()}\n` +
+                       `- Masa aktif: ${selectedPulsaOption.validity}\n` +
+                       `- Metode pembayaran: ${selectedPulsaPaymentMethod}\n\n` +
+                       `Silakan konfirmasi pesanan ini. Terima kasih.`;
+        
+        const whatsappUrl = `https://wa.me/6281327138819?text=${encodeURIComponent(message)}`;
+        window.open(whatsappUrl, '_blank');
+        
+        pulsaTopupModal.style.display = 'none';
+        showToast('Pesanan telah dikirim ke WhatsApp', 'success');
+        loadAccountInfo(); // Refresh account info
+        
+        // Reset form
+        pulsaPhoneNumber.value = '';
+        document.querySelectorAll('.topup-item').forEach(item => {
+          item.classList.remove('selected');
+        });
+        document.querySelectorAll('#pulsaTopupModal .payment-method').forEach(item => {
+          item.classList.remove('selected');
+        });
+        selectedPulsaOption = null;
+        selectedPulsaPaymentMethod = null;
+      }
 
       // Load transaction history
       function loadTransactionHistory(category = 'all') {
@@ -1591,6 +2629,10 @@
                 description = `${data.gameName} - ${data.amount} ${currentGameId === 'genshin' || currentGameId === 'honkaistarrail' ? 'Genesis Crystals' : 'Diamond'}`;
                 icon = 'fa-gamepad';
                 iconColor = 'text-[#FF5F7E]';
+              } else if (data.type === 'pulsa') {
+                description = `Pulsa ${data.provider} Rp ${data.amount.toLocaleString()}`;
+                icon = 'fa-mobile-alt';
+                iconColor = 'text-[#5F8BFF]';
               } else if (data.type === 'voucher') {
                 description = `Voucher ${data.voucherName}`;
                 icon = 'fa-ticket-alt';
@@ -1919,6 +2961,12 @@
             return '1. Buka aplikasi OVO<br>2. Pilih "Transfer"<br>3. Masukkan nomor 081234567890<br>4. Masukkan jumlah pembayaran<br>5. Konfirmasi pembayaran';
           case 'dana':
             return '1. Buka aplikasi DANA<br>2. Pilih "Kirim"<br>3. Masukkan nomor 081234567890<br>4. Masukkan jumlah pembayaran<br>5. Konfirmasi pembayaran';
+          case 'shopeepay':
+            return '1. Buka aplikasi Shopee<br>2. Pilih "ShopeePay"<br>3. Scan QR code yang muncul<br>4. Konfirmasi pembayaran';
+          case 'linkaja':
+            return '1. Buka aplikasi LinkAja<br>2. Pilih "Transfer"<br>3. Masukkan nomor 081234567890<br>4. Masukkan jumlah pembayaran<br>5. Konfirmasi pembayaran';
+          case 'qris':
+            return '1. Buka aplikasi e-wallet atau mobile banking<br>2. Pilih "Scan QRIS"<br>3. Scan QR code yang muncul<br>4. Konfirmasi pembayaran';
           case 'bank':
             return '1. Transfer ke rekening BCA 1234567890 a.n. PediaPay<br>2. Masukkan jumlah pembayaran<br>3. Konfirmasi dengan mengirim bukti transfer';
           default:
