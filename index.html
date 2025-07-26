@@ -1256,7 +1256,31 @@
             Top Up Sekarang
           </button>
         </div>
+        
+        <!-- memek --!>
+        <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2">
+        <div class="relative">
+          <img alt="memek" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/3vxnc0.jpg" loading="lazy"/>
+          <div class="discount-badge absolute top-2 right-2 bg-gradient-to-r from-[#FF5F7E] to-[#FF8A9B] rounded-md px-2 py-0.5 text-xs font-semibold flex items-center space-x-1 select-none">
+            <i class="fas fa-gem text-white"></i>
+            <span class="text-white">-15%</span>
+          </div>
+          <div class="absolute bottom-2 left-2 bg-black bg-opacity-50 rounded-md px-2 py-0.5 text-xs">
+            <i class="fas fa-star text-yellow-400"></i>
+            <span class="text-white">New</span>
+          </div>
+        </div>
+        <h3 class="font-bold text-white text-sm select-none">
+          memek
+        </h3>
+        <p class="text-[#B9B9B9] text-xs select-none">
+          Supercell
+        </p>
+        <button class="top-up-btn w-full rounded-md py-2 text-xs font-semibold" onclick="window.open('https://hsr.hoyoverse.com', '_blank')">
+          Top Up Sekarang
+        </button>
       </div>
+     </div>
     </div>
 
     <!-- Pulsa Category Section -->
@@ -3418,7 +3442,7 @@ document.addEventListener('DOMContentLoaded', function() {
     auth.signOut()
       .then(() => {
         accountModal.style.display = 'none';
-        authButton.textContent = 'Login/Daftar';
+        authButton.textContent = '💎';
         showToast('Anda telah logout', 'success');
         notificationBadge.style.display = 'none'; // Hide notification badge
       })
@@ -3534,7 +3558,7 @@ document.addEventListener('DOMContentLoaded', function() {
       // Check for unread notifications
       notificationBadge.style.display = 'block';
     } else {
-      authButton.textContent = 'Login/Daftar';
+      authButton.textContent = '💎';
       notificationBadge.style.display = 'none';
     }
   });
