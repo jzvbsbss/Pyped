@@ -675,192 +675,241 @@
     </div>
   </div>
 
-<!-- Game Top-up Modal -->
-<div id="gameTopupModal" class="modal">
-  <div class="modal-content">
-    <span class="close-btn" id="closeGameTopupModal">&times;</span>
-    <h2 class="text-xl font-bold mb-4 text-center" id="gameTopupTitle">Top Up Diamond Mobile Legends</h2>
-    
-    <div class="form-group">
-      <label for="gamePlayerId">ID Player</label>
-      <input type="text" id="gamePlayerId" placeholder="Masukkan ID Player">
-      <div class="error-message" id="gamePlayerIdError"></div>
-    </div>
-    
-    <div class="form-group">
-      <label for="gameServerId">Server ID (Opsional)</label>
-      <input type="text" id="gameServerId" placeholder="Masukkan Server ID">
-    </div>
-    
-    <div class="mt-3 mb-2 font-medium">Pilih Nominal</div>
-    
-    <div class="grid grid-cols-2 gap-3" id="topupOptions">
-      <!-- Top-up options will be loaded here -->
-    </div>
-    
-    <div class="error-message" id="topupOptionError" style="margin-top: 10px;"></div>
+  <!-- Game Top-up Modal -->
+  <div id="gameTopupModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" id="closeGameTopupModal">&times;</span>
+      <h2 class="text-xl font-bold mb-4 text-center" id="gameTopupTitle">Top Up Diamond Mobile Legends</h2>
+      
+      <div class="form-group">
+        <label for="gamePlayerId">ID Player</label>
+        <input type="text" id="gamePlayerId" placeholder="Masukkan ID Player">
+        <div class="error-message" id="gamePlayerIdError"></div>
+      </div>
+      
+      <div class="form-group">
+        <label for="gameServerId">Server ID (Opsional)</label>
+        <input type="text" id="gameServerId" placeholder="Masukkan Server ID">
+      </div>
+      
+      <div class="mt-3 mb-2 font-medium">Pilih Nominal</div>
+      
+      <div class="grid grid-cols-2 gap-3" id="topupOptions">
+        <!-- Top-up options will be loaded here -->
+      </div>
+      
+      <div class="error-message" id="topupOptionError" style="margin-top: 10px;"></div>
 
-    <div class="mt-3 mb-2 font-medium">Metode Pembayaran</div>
-    
-    <div class="payment-method" data-method="dana">
-      <div class="flex items-center">
-        <img src="https://files.catbox.moe/7jr8uz.jpg" alt="DANA" class="w-8 h-8 mr-3">
-        <div>
-          <div class="font-medium">DANA</div>
-          <div class="text-xs text-[#B9B9B9]">Biaya admin Rp 1.500</div>
+      <div class="mt-3 mb-2 font-medium">Metode Pembayaran</div>
+      
+      <div class="payment-method" data-method="dana">
+        <div class="flex items-center">
+          <img src="https://files.catbox.moe/7jr8uz.jpg" alt="DANA" class="w-8 h-8 mr-3">
+          <div>
+            <div class="font-medium">DANA</div>
+            <div class="text-xs text-[#B9B9B9]">Biaya admin Rp 1.500</div>
+          </div>
         </div>
       </div>
-    </div>
-    
-    <div class="payment-method" data-method="gopay">
-      <div class="flex items-center">
-        <img src="https://files.catbox.moe/8ro408.jpg" alt="Gopay" class="w-8 h-8 mr-3">
-        <div>
-          <div class="font-medium">Gopay</div>
-          <div class="text-xs text-[#B9B9B9]">Biaya admin Rp 1.500</div>
+      
+      <div class="payment-method" data-method="gopay">
+        <div class="flex items-center">
+          <img src="https://files.catbox.moe/8ro408.jpg" alt="Gopay" class="w-8 h-8 mr-3">
+          <div>
+            <div class="font-medium">Gopay</div>
+            <div class="text-xs text-[#B9B9B9]">Biaya admin Rp 1.500</div>
+          </div>
         </div>
       </div>
-    </div>
-    
-    <div class="payment-method" data-method="ovo">
-      <div class="flex items-center">
-        <img src="https://files.catbox.moe/3wwgfj.jpg" alt="OVO" class="w-8 h-8 mr-3">
-        <div>
-          <div class="font-medium">OVO</div>
-          <div class="text-xs text-[#B9B9B9]">Biaya admin Rp 1.500</div>
-         </div>
-      </div>
-    </div> 
-    
-     <div class="payment-method" data-method="qris">
-      <div class="flex items-center">
-        <img src="https://files.catbox.moe/mumdn3.jpg" alt="QRIS" class="w-8 h-8 mr-3">
-        <div>
-          <div class="font-medium">QRIS</div>
-          <div class="text-xs text-[#B9B9B9]">Biaya admin Rp 0</div>
+      
+      <div class="payment-method" data-method="ovo">
+        <div class="flex items-center">
+          <img src="https://files.catbox.moe/3wwgfj.jpg" alt="OVO" class="w-8 h-8 mr-3">
+          <div>
+            <div class="font-medium">OVO</div>
+            <div class="text-xs text-[#B9B9B9]">Biaya admin Rp 1.500</div>
+          </div>
         </div>
       </div>
-    </div>
-    
-    <div class="payment-method" data-method="shopeepay">
-      <div class="flex items-center">
-        <img src="https://files.catbox.moe/qalzw5.jpg" alt="shopeepay" class="w-8 h-8 mr-3">
-        <div>
-          <div class="font-medium">ShopeePay</div>
-          <div class="text-xs text-[#B9B9B9]">Biaya admin Rp 0</div>
+      
+      <div class="payment-method" data-method="qris">
+        <div class="flex items-center">
+          <img src="https://files.catbox.moe/mumdn3.jpg" alt="QRIS" class="w-8 h-8 mr-3">
+          <div>
+            <div class="font-medium">QRIS</div>
+            <div class="text-xs text-[#B9B9B9]">Biaya admin Rp 0</div>
+          </div>
         </div>
       </div>
-    </div>
-    
-    <div class="payment-method" data-method="linkaja">
-      <div class="flex items-center">
-        <img src="https://files.catbox.moe/gucr29.jpg" alt="LinkAja" class="w-8 h-8 mr-3">
-        <div>
-          <div class="font-medium">LinkAja</div>
-          <div class="text-xs text-[#B9B9B9]">Biaya admin Rp 0</div>
+      
+      <div class="payment-method" data-method="shopeepay">
+        <div class="flex items-center">
+          <img src="https://files.catbox.moe/qalzw5.jpg" alt="shopeepay" class="w-8 h-8 mr-3">
+          <div>
+            <div class="font-medium">ShopeePay</div>
+            <div class="text-xs text-[#B9B9B9]">Biaya admin Rp 0</div>
+          </div>
         </div>
       </div>
+      
+      <div class="payment-method" data-method="linkaja">
+        <div class="flex items-center">
+          <img src="https://files.catbox.moe/gucr29.jpg" alt="LinkAja" class="w-8 h-8 mr-3">
+          <div>
+            <div class="font-medium">LinkAja</div>
+            <div class="text-xs text-[#B9B9B9]">Biaya admin Rp 0</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="error-message" id="gamePaymentMethodError" style="margin-top: 10px;"></div>
+      
+      <button class="w-full bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md py-2 text-sm font-semibold mt-4 flex items-center justify-center" id="confirmGameTopupBtn">
+        <span id="confirmGameTopupBtnText">Lanjutkan Pembayaran</span>
+        <div id="confirmGameTopupSpinner" class="spinner" style="display: none;"></div>
+      </button>
     </div>
-    
-    <div class="error-message" id="gamePaymentMethodError" style="margin-top: 10px;"></div>
-    
-    <button class="w-full bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md py-2 text-sm font-semibold mt-4 flex items-center justify-center" id="confirmGameTopupBtn">
-      <span id="confirmGameTopupBtnText">Lanjutkan Pembayaran</span>
-      <div id="confirmGameTopupSpinner" class="spinner" style="display: none;"></div>
-    </button>
   </div>
-</div>
 
-<!-- Pulsa Top-up Modal -->
-<div id="pulsaTopupModal" class="modal">
-  <div class="modal-content">
-    <span class="close-btn" id="closePulsaTopupModal">&times;</span>
-    <h2 class="text-xl font-bold mb-4 text-center" id="pulsaTopupTitle">Top Up Pulsa Telkomsel</h2>
-    
-    <div class="form-group">
-      <label for="pulsaPhoneNumber">Nomor Telepon</label>
-      <input type="tel" id="pulsaPhoneNumber" placeholder="Masukkan nomor telepon">
-      <div class="error-message" id="pulsaPhoneNumberError"></div>
-    </div>
-    
-    <div class="mt-3 mb-2 font-medium">Pilih Nominal</div>
-    
-    <div class="grid grid-cols-2 gap-3" id="pulsaOptions">
-      <!-- Pulsa options will be loaded here -->
-    </div>
-    
-    <div class="error-message" id="pulsaOptionError" style="margin-top: 10px;"></div>
+  <!-- Pulsa Top-up Modal -->
+  <div id="pulsaTopupModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" id="closePulsaTopupModal">&times;</span>
+      <h2 class="text-xl font-bold mb-4 text-center" id="pulsaTopupTitle">Top Up Pulsa Telkomsel</h2>
+      
+      <div class="form-group">
+        <label for="pulsaPhoneNumber">Nomor Telepon</label>
+        <input type="tel" id="pulsaPhoneNumber" placeholder="Masukkan nomor telepon">
+        <div class="error-message" id="pulsaPhoneNumberError"></div>
+      </div>
+      
+      <div class="mt-3 mb-2 font-medium">Pilih Nominal</div>
+      
+      <div class="grid grid-cols-2 gap-3" id="pulsaOptions">
+        <!-- Pulsa options will be loaded here -->
+      </div>
+      
+      <div class="error-message" id="pulsaOptionError" style="margin-top: 10px;"></div>
 
-    <div class="mt-3 mb-2 font-medium">Metode Pembayaran</div>
-    
-    <div class="payment-method" data-method="dana">
-      <div class="flex items-center">
-        <img src="https://files.catbox.moe/7jr8uz.jpg" alt="DANA" class="w-8 h-8 mr-3">
-        <div>
-          <div class="font-medium">DANA</div>
-          <div class="text-xs text-[#B9B9B9]">Biaya admin Rp 1.500</div>
+      <div class="mt-3 mb-2 font-medium">Metode Pembayaran</div>
+      
+      <div class="payment-method" data-method="dana">
+        <div class="flex items-center">
+          <img src="https://files.catbox.moe/7jr8uz.jpg" alt="DANA" class="w-8 h-8 mr-3">
+          <div>
+            <div class="font-medium">DANA</div>
+            <div class="text-xs text-[#B9B9B9]">Biaya admin Rp 1.500</div>
+          </div>
         </div>
       </div>
-    </div>
-    
-    <div class="payment-method" data-method="gopay">
-      <div class="flex items-center">
-        <img src="https://files.catbox.moe/8ro408.jpg" alt="Gopay" class="w-8 h-8 mr-3">
-        <div>
-          <div class="font-medium">Gopay</div>
-          <div class="text-xs text-[#B9B9B9]">Biaya admin Rp 1.500</div>
+      
+      <div class="payment-method" data-method="gopay">
+        <div class="flex items-center">
+          <img src="https://files.catbox.moe/8ro408.jpg" alt="Gopay" class="w-8 h-8 mr-3">
+          <div>
+            <div class="font-medium">Gopay</div>
+            <div class="text-xs text-[#B9B9B9]">Biaya admin Rp 1.500</div>
+          </div>
         </div>
       </div>
-    </div>
-    
-    <div class="payment-method" data-method="ovo">
-      <div class="flex items-center">
-        <img src="https://files.catbox.moe/3wwgfj.jpg" alt="OVO" class="w-8 h-8 mr-3">
-        <div>
-          <div class="font-medium">OVO</div>
-          <div class="text-xs text-[#B9B9B9]">Biaya admin Rp 1.500</div>
+      
+      <div class="payment-method" data-method="ovo">
+        <div class="flex items-center">
+          <img src="https://files.catbox.moe/3wwgfj.jpg" alt="OVO" class="w-8 h-8 mr-3">
+          <div>
+            <div class="font-medium">OVO</div>
+            <div class="text-xs text-[#B9B9B9]">Biaya admin Rp 1.500</div>
+          </div>
         </div>
       </div>
-    </div>
-    
-    <div class="payment-method" data-method="qris">
-      <div class="flex items-center">
-        <img src="https://files.catbox.moe/mumdn3.jpg" alt="QRIS" class="w-8 h-8 mr-3">
-        <div>
-          <div class="font-medium">QRIS</div>
-          <div class="text-xs text-[#B9B9B9]">Biaya admin Rp 0</div>
+      
+      <div class="payment-method" data-method="qris">
+        <div class="flex items-center">
+          <img src="https://files.catbox.moe/mumdn3.jpg" alt="QRIS" class="w-8 h-8 mr-3">
+          <div>
+            <div class="font-medium">QRIS</div>
+            <div class="text-xs text-[#B9B9B9]">Biaya admin Rp 0</div>
+          </div>
         </div>
       </div>
-    </div>
-    
-    <div class="payment-method" data-method="shopeepay">
-      <div class="flex items-center">
-        <img src="https://files.catbox.moe/qalzw5.jpg" alt="shopeepay" class="w-8 h-8 mr-3">
-        <div>
-          <div class="font-medium">ShopeePay</div>
-          <div class="text-xs text-[#B9B9B9]">Biaya admin Rp 0</div>
+      
+      <div class="payment-method" data-method="shopeepay">
+        <div class="flex items-center">
+          <img src="https://files.catbox.moe/qalzw5.jpg" alt="shopeepay" class="w-8 h-8 mr-3">
+          <div>
+            <div class="font-medium">ShopeePay</div>
+            <div class="text-xs text-[#B9B9B9]">Biaya admin Rp 0</div>
+          </div>
         </div>
       </div>
-    </div>
-    
-    <div class="payment-method" data-method="linkaja">
-      <div class="flex items-center">
-        <img src="https://files.catbox.moe/gucr29.jpg" alt="LinkAja" class="w-8 h-8 mr-3">
-        <div>
-          <div class="font-medium">LinkAja</div>
-          <div class="text-xs text-[#B9B9B9]">Biaya admin Rp 0</div>
+      
+      <div class="payment-method" data-method="linkaja">
+        <div class="flex items-center">
+          <img src="https://files.catbox.moe/gucr29.jpg" alt="LinkAja" class="w-8 h-8 mr-3">
+          <div>
+            <div class="font-medium">LinkAja</div>
+            <div class="text-xs text-[#B9B9B9]">Biaya admin Rp 0</div>
+          </div>
         </div>
       </div>
+      
+      <div class="error-message" id="pulsaPaymentMethodError" style="margin-top: 10px;"></div>
+      
+      <button class="w-full bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md py-2 text-sm font-semibold mt-4 flex items-center justify-center" id="confirmPulsaTopupBtn">
+        <span id="confirmPulsaTopupBtnText">Lanjutkan pembayaran</span>
+        <div id="confirmPulsaTopupSpinner" class="spinner" style="display: none;"></div>
+      </button>
     </div>
-    
-    <div class="error-message" id="pulsaPaymentMethodError" style="margin-top: 10px;"></div>
-    
-    <button class="w-full bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md py-2 text-sm font-semibold mt-4 flex items-center justify-center" id="confirmPulsaTopupBtn">
-      <span id="confirmPulsaTopupBtnText">Lanjutkan pembayaran</span>
-      <div id="confirmPulsaTopupSpinner" class="spinner" style="display: none;"></div>
-    </button>
   </div>
-</div>
+
+  <!-- SMM Top-up Modal -->
+  <div id="smmTopupModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" id="closeSmmTopupModal">&times;</span>
+      <h2 class="text-xl font-bold mb-4 text-center" id="smmTopupTitle">Order SMM Service</h2>
+      
+      <div class="form-group">
+        <label for="smmLink">Link/Username</label>
+        <input type="text" id="smmLink" placeholder="Masukkan link atau username">
+        <div class="error-message" id="smmLinkError"></div>
+      </div>
+      
+      <div class="form-group">
+        <label for="smmQuantity">Jumlah</label>
+        <input type="number" id="smmQuantity" placeholder="Masukkan jumlah">
+        <div class="error-message" id="smmQuantityError"></div>
+      </div>
+      
+      <div class="mt-3 mb-2 font-medium">Metode Pembayaran</div>
+      
+      <div class="payment-method" data-method="dana">
+        <div class="flex items-center">
+          <img src="https://files.catbox.moe/7jr8uz.jpg" alt="DANA" class="w-8 h-8 mr-3">
+          <div>
+            <div class="font-medium">DANA</div>
+            <div class="text-xs text-[#B9B9B9]">Biaya admin Rp 1.500</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="payment-method" data-method="gopay">
+        <div class="flex items-center">
+          <img src="https://files.catbox.moe/8ro408.jpg" alt="Gopay" class="w-8 h-8 mr-3">
+          <div>
+            <div class="font-medium">Gopay</div>
+            <div class="text-xs text-[#B9B9B9]">Biaya admin Rp 1.500</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="error-message" id="smmPaymentMethodError" style="margin-top: 10px;"></div>
+      
+      <button class="w-full bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md py-2 text-sm font-semibold mt-4 flex items-center justify-center" id="confirmSmmTopupBtn">
+        <span id="confirmSmmTopupBtnText">Lanjutkan Pembayaran</span>
+        <div id="confirmSmmTopupSpinner" class="spinner" style="display: none;"></div>
+      </button>
+    </div>
+  </div>
 
   <div class="px-5 pt-5 pb-3 flex justify-between items-center bg-[#2B2360] sticky top-0 z-10">
     <div class="flex items-center space-x-2">
@@ -873,8 +922,8 @@
         <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full" id="notificationBadge" style="display: none;"></span>
       </button>
       <button class="bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-lg px-4 py-2 text-white text-sm font-semibold shadow-lg flex items-center gap-2" id="authButton">
-  <i class="fas fa-gem"></i>
-</button>
+        <i class="fas fa-gem"></i>
+      </button>
     </div>
   </div>
 
@@ -928,7 +977,7 @@
     <div class="category-tabs-container">
       <button class="category-tab-main active" data-category="game">Game</button>
       <button class="category-tab-main" data-category="pulsa">Pulsa</button>
-      <button class="category-tab-main" data-category="voucher">SMM Layanan Social Media</button>
+      <button class="category-tab-main" data-category="smm">SMM</button>
     </div>
 
     <!-- Game Category Section -->
@@ -1688,6 +1737,197 @@
         </div>
       </div>
     </div>
+
+    <!-- SMM Category Section -->
+    <div class="category-section" id="smmCategory">
+      <div class="flex justify-between items-center mt-3">
+        <div>
+          <h2 class="text-[#6B63B5] font-semibold text-lg select-none">
+            Social Media <span class="font-bold text-white">Services</span>
+          </h2>
+          <p class="text-[#6B63B5] text-sm select-none">
+            Boost your social media presence with our services...
+          </p>
+        </div>
+        <button class="text-white text-xs font-semibold bg-[#3B2E7E] rounded-md px-3 py-1 flex items-center space-x-1 select-none hover:bg-[#4A3D8E] transition">
+          <span>Lihat Semua</span>
+          <i class="fas fa-arrow-up-right-from-square text-xs"></i>
+        </button>
+      </div>
+
+      <!-- SMM Platform Tabs -->
+      <div class="flex space-x-2 mb-4 overflow-x-auto pb-2">
+        <button class="category-tab active" data-platform="all">All</button>
+        <button class="category-tab" data-platform="instagram">Instagram</button>
+        <button class="category-tab" data-platform="youtube">YouTube</button>
+        <button class="category-tab" data-platform="tiktok">TikTok</button>
+        <button class="category-tab" data-platform="twitter">Twitter</button>
+        <button class="category-tab" data-platform="facebook">Facebook</button>
+      </div>
+
+      <!-- SMM Services Grid -->
+      <div class="grid grid-cols-2 gap-4 mt-4" id="smmGrid">
+        <!-- Instagram Followers -->
+        <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2" data-platform="instagram">
+          <div class="relative">
+            <img alt="Instagram Followers" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/1l2d9w.jpg"/>
+            <div class="provider-badge">
+              <i class="fab fa-instagram text-purple-500"></i>
+              <span class="text-white">Instagram</span>
+            </div>
+          </div>
+          <h3 class="font-bold text-white text-sm select-none">
+            Instagram Followers
+          </h3>
+          <div class="flex justify-between items-center">
+            <span class="text-sm text-[#7B5FFF] font-bold">Rp 10.000/1K</span>
+            <button class="top-up-btn bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md px-3 py-1 text-xs font-semibold" data-service="Instagram Followers" data-service-id="ig-followers" data-price="10000" data-unit="1K">
+              Beli
+            </button>
+          </div>
+        </div>
+
+        <!-- Instagram Likes -->
+        <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2" data-platform="instagram">
+          <div class="relative">
+            <img alt="Instagram Likes" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/1l2d9w.jpg"/>
+            <div class="provider-badge">
+              <i class="fab fa-instagram text-purple-500"></i>
+              <span class="text-white">Instagram</span>
+            </div>
+          </div>
+          <h3 class="font-bold text-white text-sm select-none">
+            Instagram Likes
+          </h3>
+          <div class="flex justify-between items-center">
+            <span class="text-sm text-[#7B5FFF] font-bold">Rp 8.000/1K</span>
+            <button class="top-up-btn bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md px-3 py-1 text-xs font-semibold" data-service="Instagram Likes" data-service-id="ig-likes" data-price="8000" data-unit="1K">
+              Beli
+            </button>
+          </div>
+        </div>
+
+        <!-- YouTube Views -->
+        <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2" data-platform="youtube">
+          <div class="relative">
+            <img alt="YouTube Views" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/7k8x9y.jpg"/>
+            <div class="provider-badge">
+              <i class="fab fa-youtube text-red-500"></i>
+              <span class="text-white">YouTube</span>
+            </div>
+          </div>
+          <h3 class="font-bold text-white text-sm select-none">
+            YouTube Views
+          </h3>
+          <div class="flex justify-between items-center">
+            <span class="text-sm text-[#7B5FFF] font-bold">Rp 15.000/1K</span>
+            <button class="top-up-btn bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md px-3 py-1 text-xs font-semibold" data-service="YouTube Views" data-service-id="yt-views" data-price="15000" data-unit="1K">
+              Beli
+            </button>
+          </div>
+        </div>
+
+        <!-- YouTube Subscribers -->
+        <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2" data-platform="youtube">
+          <div class="relative">
+            <img alt="YouTube Subscribers" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/7k8x9y.jpg"/>
+            <div class="provider-badge">
+              <i class="fab fa-youtube text-red-500"></i>
+              <span class="text-white">YouTube</span>
+            </div>
+          </div>
+          <h3 class="font-bold text-white text-sm select-none">
+            YouTube Subscribers
+          </h3>
+          <div class="flex justify-between items-center">
+            <span class="text-sm text-[#7B5FFF] font-bold">Rp 25.000/100</span>
+            <button class="top-up-btn bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md px-3 py-1 text-xs font-semibold" data-service="YouTube Subscribers" data-service-id="yt-subs" data-price="25000" data-unit="100">
+              Beli
+            </button>
+          </div>
+        </div>
+
+        <!-- TikTok Followers -->
+        <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2" data-platform="tiktok">
+          <div class="relative">
+            <img alt="TikTok Followers" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/3m4n5o.jpg"/>
+            <div class="provider-badge">
+              <i class="fab fa-tiktok text-black"></i>
+              <span class="text-white">TikTok</span>
+            </div>
+          </div>
+          <h3 class="font-bold text-white text-sm select-none">
+            TikTok Followers
+          </h3>
+          <div class="flex justify-between items-center">
+            <span class="text-sm text-[#7B5FFF] font-bold">Rp 12.000/1K</span>
+            <button class="top-up-btn bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md px-3 py-1 text-xs font-semibold" data-service="TikTok Followers" data-service-id="tt-followers" data-price="12000" data-unit="1K">
+              Beli
+            </button>
+          </div>
+        </div>
+
+        <!-- TikTok Likes -->
+        <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2" data-platform="tiktok">
+          <div class="relative">
+            <img alt="TikTok Likes" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/3m4n5o.jpg"/>
+            <div class="provider-badge">
+              <i class="fab fa-tiktok text-black"></i>
+              <span class="text-white">TikTok</span>
+            </div>
+          </div>
+          <h3 class="font-bold text-white text-sm select-none">
+            TikTok Likes
+          </h3>
+          <div class="flex justify-between items-center">
+            <span class="text-sm text-[#7B5FFF] font-bold">Rp 9.000/1K</span>
+            <button class="top-up-btn bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md px-3 py-1 text-xs font-semibold" data-service="TikTok Likes" data-service-id="tt-likes" data-price="9000" data-unit="1K">
+              Beli
+            </button>
+          </div>
+        </div>
+
+        <!-- Twitter Followers -->
+        <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2" data-platform="twitter">
+          <div class="relative">
+            <img alt="Twitter Followers" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/5p6q7r.jpg"/>
+            <div class="provider-badge">
+              <i class="fab fa-twitter text-blue-400"></i>
+              <span class="text-white">Twitter</span>
+            </div>
+          </div>
+          <h3 class="font-bold text-white text-sm select-none">
+            Twitter Followers
+          </h3>
+          <div class="flex justify-between items-center">
+            <span class="text-sm text-[#7B5FFF] font-bold">Rp 7.000/1K</span>
+            <button class="top-up-btn bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md px-3 py-1 text-xs font-semibold" data-service="Twitter Followers" data-service-id="tw-followers" data-price="7000" data-unit="1K">
+              Beli
+            </button>
+          </div>
+        </div>
+
+        <!-- Facebook Page Likes -->
+        <div class="game-card bg-[#3B2E7E] rounded-xl p-3 space-y-2" data-platform="facebook">
+          <div class="relative">
+            <img alt="Facebook Likes" class="rounded-lg w-full h-28 object-cover" src="https://files.catbox.moe/9s0t1u.jpg"/>
+            <div class="provider-badge">
+              <i class="fab fa-facebook text-blue-600"></i>
+              <span class="text-white">Facebook</span>
+            </div>
+          </div>
+          <h3 class="font-bold text-white text-sm select-none">
+            Facebook Page Likes
+          </h3>
+          <div class="flex justify-between items-center">
+            <span class="text-sm text-[#7B5FFF] font-bold">Rp 10.000/1K</span>
+            <button class="top-up-btn bg-gradient-to-r from-[#7B5FFF] to-[#A97FFF] rounded-md px-3 py-1 text-xs font-semibold" data-service="Facebook Likes" data-service-id="fb-likes" data-price="10000" data-unit="1K">
+              Beli
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
 <!-- Bottom Navigation -->
@@ -1709,9 +1949,9 @@
     <span>Akun</span>
   </button>
 </nav>
-  
-    <script>
-    // Initialize Firebase
+
+<script>
+// Initialize Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyA5LfKdQ3ThSh0h0yzwq8htedfYti_hbxQ",
   authDomain: "pediapay-topup.firebaseapp.com",
@@ -1859,6 +2099,18 @@ const pulsaOptions = {
   ]
 };
 
+// SMM services data
+const smmServices = {
+  'ig-followers': { name: 'Instagram Followers', price: 10000, unit: '1K' },
+  'ig-likes': { name: 'Instagram Likes', price: 8000, unit: '1K' },
+  'yt-views': { name: 'YouTube Views', price: 15000, unit: '1K' },
+  'yt-subs': { name: 'YouTube Subscribers', price: 25000, unit: '100' },
+  'tt-followers': { name: 'TikTok Followers', price: 12000, unit: '1K' },
+  'tt-likes': { name: 'TikTok Likes', price: 9000, unit: '1K' },
+  'tw-followers': { name: 'Twitter Followers', price: 7000, unit: '1K' },
+  'fb-likes': { name: 'Facebook Page Likes', price: 10000, unit: '1K' }
+};
+
 document.addEventListener('DOMContentLoaded', function() {
   // Banner Slider
   const container = document.getElementById('bannerContainer');
@@ -1959,6 +2211,22 @@ document.addEventListener('DOMContentLoaded', function() {
     this.classList.add('active', 'text-[#7B5FFF]');
   });
 
+  document.getElementById('accountButton').addEventListener('click', function() {
+    if (auth.currentUser) {
+      loadAccountInfo();
+      accountModal.style.display = 'flex';
+    } else {
+      authModal.style.display = 'flex';
+    }
+    
+    // Update active nav button
+    document.querySelectorAll('.nav-button').forEach(btn => {
+      btn.classList.remove('active', 'text-[#7B5FFF]');
+      btn.classList.add('text-[#B9B9B9]');
+    });
+    this.classList.add('active', 'text-[#7B5FFF]');
+  });
+
   // Category tabs
   const categoryTabs = document.querySelectorAll('.category-tab-main');
   const categorySections = document.querySelectorAll('.category-section');
@@ -2004,7 +2272,30 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Auth Modal Elements
+  // SMM platform tabs
+  const smmPlatformTabs = document.querySelectorAll('#smmCategory .category-tab');
+  const smmCards = document.querySelectorAll('#smmGrid .game-card');
+  
+  smmPlatformTabs.forEach(tab => {
+    tab.addEventListener('click', function() {
+      const platform = this.getAttribute('data-platform');
+      
+      // Update active tab
+      smmPlatformTabs.forEach(t => t.classList.remove('active'));
+      this.classList.add('active');
+      
+      // Show corresponding SMM cards
+      smmCards.forEach(card => {
+        if (platform === 'all' || card.getAttribute('data-platform') === platform) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+
+  // Modal Elements
   const authModal = document.getElementById('authModal');
   const closeModal = document.getElementById('closeModal');
   const authButton = document.getElementById('authButton');
@@ -2020,7 +2311,6 @@ document.addEventListener('DOMContentLoaded', function() {
   const switchToRegister = document.getElementById('switchToRegister');
   const switchToLogin = document.getElementById('switchToLogin');
   
-  // Account Modal Elements
   const accountModal = document.getElementById('accountModal');
   const closeAccountModal = document.getElementById('closeAccountModal');
   const accountInfo = document.getElementById('accountInfo');
@@ -2028,27 +2318,22 @@ document.addEventListener('DOMContentLoaded', function() {
   const topupBalanceBtn = document.getElementById('topupBalanceBtn');
   const historyBtn = document.getElementById('historyBtn');
   
-  // Top-up Modal Elements
   const topupModal = document.getElementById('topupModal');
   const closeTopupModal = document.getElementById('closeTopupModal');
   const topupAmount = document.getElementById('topupAmount');
   const paymentMethods = document.querySelectorAll('.payment-method');
   const confirmTopupBtn = document.getElementById('confirmTopupBtn');
   
-  // Payment Modal Elements
   const paymentModal = document.getElementById('paymentModal');
   const closePaymentModal = document.getElementById('closePaymentModal');
   const paymentDetails = document.getElementById('paymentDetails');
   const completePaymentBtn = document.getElementById('completePaymentBtn');
   const cancelPaymentBtn = document.getElementById('cancelPaymentBtn');
   
-  // History Modal Elements
   const historyModal = document.getElementById('historyModal');
   const closeHistoryModal = document.getElementById('closeHistoryModal');
   const historyList = document.getElementById('historyList');
-  const historyTabs = document.querySelectorAll('.history-modal .category-tab');
   
-  // Game Top-up Modal Elements
   const gameTopupModal = document.getElementById('gameTopupModal');
   const closeGameTopupModal = document.getElementById('closeGameTopupModal');
   const gameTopupTitle = document.getElementById('gameTopupTitle');
@@ -2057,7 +2342,6 @@ document.addEventListener('DOMContentLoaded', function() {
   const topupOptions = document.getElementById('topupOptions');
   const confirmGameTopupBtn = document.getElementById('confirmGameTopupBtn');
   
-  // Pulsa Top-up Modal Elements
   const pulsaTopupModal = document.getElementById('pulsaTopupModal');
   const closePulsaTopupModal = document.getElementById('closePulsaTopupModal');
   const pulsaTopupTitle = document.getElementById('pulsaTopupTitle');
@@ -2065,7 +2349,13 @@ document.addEventListener('DOMContentLoaded', function() {
   const pulsaOptionsContainer = document.getElementById('pulsaOptions');
   const confirmPulsaTopupBtn = document.getElementById('confirmPulsaTopupBtn');
   
-  // Notification button
+  const smmTopupModal = document.getElementById('smmTopupModal');
+  const closeSmmTopupModal = document.getElementById('closeSmmTopupModal');
+  const smmTopupTitle = document.getElementById('smmTopupTitle');
+  const smmLink = document.getElementById('smmLink');
+  const smmQuantity = document.getElementById('smmQuantity');
+  const confirmSmmTopupBtn = document.getElementById('confirmSmmTopupBtn');
+  
   const notificationBtn = document.getElementById('notificationBtn');
   const notificationBadge = document.getElementById('notificationBadge');
   
@@ -2073,10 +2363,12 @@ document.addEventListener('DOMContentLoaded', function() {
   let selectedPaymentMethod = null;
   let selectedTopupOption = null;
   let selectedPulsaOption = null;
+  let selectedSmmService = null;
   let currentGameId = null;
   let currentPulsaId = null;
   let selectedGamePaymentMethod = null;
   let selectedPulsaPaymentMethod = null;
+  let selectedSmmPaymentMethod = null;
   let currentPulsaProvider = 'telkomsel';
 
   // Show toast notification
@@ -2125,6 +2417,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
   closePulsaTopupModal.addEventListener('click', () => {
     pulsaTopupModal.style.display = 'none';
+  });
+
+  closeSmmTopupModal.addEventListener('click', () => {
+    smmTopupModal.style.display = 'none';
   });
 
   // Switch between login and register tabs
@@ -2411,6 +2707,32 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
+  // SMM service buttons
+  document.querySelectorAll('.top-up-btn[data-service]').forEach(button => {
+    button.addEventListener('click', function() {
+      const serviceName = this.getAttribute('data-service');
+      const serviceId = this.getAttribute('data-service-id');
+      const price = this.getAttribute('data-price');
+      const unit = this.getAttribute('data-unit');
+      
+      if (!auth.currentUser) {
+        showToast('Anda harus login terlebih dahulu', 'error');
+        authModal.style.display = 'flex';
+        return;
+      }
+      
+      selectedSmmService = {
+        name: serviceName,
+        id: serviceId,
+        price: parseInt(price),
+        unit: unit
+      };
+      
+      smmTopupTitle.textContent = `Order ${serviceName}`;
+      smmTopupModal.style.display = 'flex';
+    });
+  });
+
   // Add payment method selection for game top-up
   document.querySelectorAll('#gameTopupModal .payment-method').forEach(method => {
     method.addEventListener('click', function() {
@@ -2429,7 +2751,16 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Update the confirmGameTopupBtn click handler
+  // Add payment method selection for SMM top-up
+  document.querySelectorAll('#smmTopupModal .payment-method').forEach(method => {
+    method.addEventListener('click', function() {
+      document.querySelectorAll('#smmTopupModal .payment-method').forEach(m => m.classList.remove('selected'));
+      this.classList.add('selected');
+      selectedSmmPaymentMethod = this.getAttribute('data-method');
+    });
+  });
+
+  // Confirm game top-up
   confirmGameTopupBtn.addEventListener('click', () => {
     const playerId = gamePlayerId.value;
     
@@ -2553,7 +2884,7 @@ document.addEventListener('DOMContentLoaded', function() {
     selectedGamePaymentMethod = null;
   }
 
-  // Similarly update the pulsa top-up handler
+  // Confirm pulsa top-up
   confirmPulsaTopupBtn.addEventListener('click', () => {
     const phoneNumber = pulsaPhoneNumber.value;
     
@@ -2581,7 +2912,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Calculate total price
-    let totalPrice = selectedPulsaOption.price;
+    const totalPrice = selectedPulsaOption.price;
     let adminFee = 0;
     
     if (selectedPulsaPaymentMethod !== 'saldo') {
@@ -2674,6 +3005,126 @@ document.addEventListener('DOMContentLoaded', function() {
     selectedPulsaPaymentMethod = null;
   }
 
+  // Confirm SMM order
+  confirmSmmTopupBtn.addEventListener('click', () => {
+    const link = smmLink.value;
+    const quantity = parseInt(smmQuantity.value);
+    
+    if (!link) {
+      showError('smmLinkError', 'Masukkan link atau username');
+      return;
+    }
+    
+    if (!quantity || quantity < 1) {
+      showError('smmQuantityError', 'Masukkan jumlah yang valid');
+      return;
+    }
+
+    if (!selectedSmmPaymentMethod) {
+      showError('smmPaymentMethodError', 'Pilih metode pembayaran');
+      return;
+    }
+    
+    const user = auth.currentUser;
+    if (!user) {
+      showToast('Anda harus login terlebih dahulu', 'error');
+      smmTopupModal.style.display = 'none';
+      authModal.style.display = 'flex';
+      return;
+    }
+    
+    // Calculate total price
+    const unitMultiplier = selectedSmmService.unit.includes('K') ? 1000 : 1;
+    const totalPrice = selectedSmmService.price * (quantity / unitMultiplier);
+    let adminFee = 0;
+    
+    if (selectedSmmPaymentMethod !== 'saldo') {
+      adminFee = 1500; // Admin fee for non-balance payments
+      totalPrice += adminFee;
+    }
+    
+    // Check balance if using saldo
+    if (selectedSmmPaymentMethod === 'saldo') {
+      db.collection('users').doc(user.uid).get()
+        .then(doc => {
+          if (doc.exists) {
+            const currentBalance = doc.data().balance || 0;
+            
+            if (currentBalance < totalPrice) {
+              showToast('Saldo tidak cukup, silakan top up terlebih dahulu', 'error');
+              smmTopupModal.style.display = 'none';
+              topupModal.style.display = 'flex';
+              return;
+            }
+            
+            // Deduct balance
+            const newBalance = currentBalance - totalPrice;
+            
+            showLoading(confirmSmmTopupBtn, 'Memproses...');
+            
+            return db.collection('users').doc(user.uid).update({
+              balance: newBalance
+            }).then(() => {
+              // Record transaction
+              return db.collection('transactions').add({
+                userId: user.uid,
+                type: 'smm',
+                service: selectedSmmService.name,
+                serviceId: selectedSmmService.id,
+                link: link,
+                quantity: quantity,
+                price: selectedSmmService.price,
+                adminFee: adminFee,
+                total: totalPrice,
+                method: selectedSmmPaymentMethod,
+                status: 'pending',
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+              });
+            });
+          }
+        })
+        .then(() => {
+          sendSmmWhatsAppMessage();
+        })
+        .catch(error => {
+          console.error('Error processing SMM order:', error);
+          showToast('Gagal memproses pesanan SMM', 'error');
+        })
+        .finally(() => {
+          hideLoading(confirmSmmTopupBtn, 'Lanjutkan ke WhatsApp');
+        });
+    } else {
+      // For non-saldo payments, just send WhatsApp message
+      sendSmmWhatsAppMessage();
+    }
+  });
+
+  function sendSmmWhatsAppMessage() {
+    // Redirect to WhatsApp
+    const message = `Halo, saya ingin order ${selectedSmmService.name}:\n\n` +
+                   `- Link/Username: ${smmLink.value}\n` +
+                   `- Jumlah: ${smmQuantity.value} ${selectedSmmService.unit}\n` +
+                   `- Harga: Rp ${(selectedSmmService.price * (smmQuantity.value / (selectedSmmService.unit.includes('K') ? 1000 : 1))).toLocaleString()}\n` +
+                   `- Metode pembayaran: ${selectedSmmPaymentMethod}\n\n` +
+                   `Silakan konfirmasi pesanan ini. Terima kasih.`;
+    
+    const whatsappUrl = `https://wa.me/6281327138819?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+    
+    smmTopupModal.style.display = 'none';
+    showToast('Pesanan telah dikirim ke WhatsApp', 'success');
+    loadAccountInfo(); // Refresh account info
+    
+    // Reset form
+    smmLink.value = '';
+    smmQuantity.value = '';
+    document.querySelectorAll('#smmTopupModal .payment-method').forEach(item => {
+      item.classList.remove('selected');
+    });
+    selectedSmmService = null;
+    selectedSmmPaymentMethod = null;
+  }
+
   // Load transaction history
   function loadTransactionHistory(category = 'all') {
     const user = auth.currentUser;
@@ -2713,16 +3164,16 @@ document.addEventListener('DOMContentLoaded', function() {
           if (data.type === 'topup') {
             description = `Top Up Saldo (${data.method})`;
           } else if (data.type === 'game') {
-            description = `${data.gameName} - ${data.amount} ${currentGameId === 'genshin' || currentGameId === 'honkaistarrail' ? 'Genesis Crystals' : 'Diamond'}`;
+            description = `${data.gameName} - ${data.amount} ${data.gameId === 'genshin' || data.gameId === 'honkaistarrail' ? 'Genesis Crystals' : 'Diamond'}`;
             icon = 'fa-gamepad';
             iconColor = 'text-[#FF5F7E]';
           } else if (data.type === 'pulsa') {
             description = `Pulsa ${data.provider} Rp ${data.amount.toLocaleString()}`;
             icon = 'fa-mobile-alt';
             iconColor = 'text-[#5F8BFF]';
-          } else if (data.type === 'voucher') {
-            description = `Voucher ${data.voucherName}`;
-            icon = 'fa-ticket-alt';
+          } else if (data.type === 'smm') {
+            description = `${data.service} - ${data.quantity} ${data.serviceId.includes('subs') ? 'Subscribers' : data.serviceId.includes('likes') ? 'Likes' : 'Followers'}`;
+            icon = 'fa-share-alt';
             iconColor = 'text-[#5FFF8B]';
           }
           
@@ -2740,7 +3191,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
               </div>
               <div class="text-right">
-                <div class="font-medium ${data.type === 'topup' ? 'text-[#5FFF8B]' : 'text-white'}">${data.type === 'topup' ? '+' : '-'}Rp ${data.price?.toLocaleString() || data.amount?.toLocaleString()}</div>
+                <div class="font-medium ${data.type === 'topup' ? 'text-[#5FFF8B]' : 'text-white'}">${data.type === 'topup' ? '+' : '-'}Rp ${data.total?.toLocaleString() || data.price?.toLocaleString() || data.amount?.toLocaleString()}</div>
                 <div class="text-xs text-[#B9B9B9]">${data.status || 'completed'}</div>
               </div>
             </div>
@@ -3080,13 +3531,11 @@ document.addEventListener('DOMContentLoaded', function() {
       // Existing and future Auth states are now persisted in the current
       // session only. Closing the window would clear any existing state even
       // if a user forgets to sign out.
-      // ...
     })
     .catch((error) => {
-      // Handle Errors here.
       console.error('Error setting auth persistence:', error);
     });
 });
-  </script>
+</script>
 </body>
 </html>
