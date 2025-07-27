@@ -2748,28 +2748,22 @@ document.addEventListener('DOMContentLoaded', function() {
   // SMM service buttons
   document.querySelectorAll('.top-up-btn[data-service]').forEach(button => {
     button.addEventListener('click', function() {
-      const serviceName = this.getAttribute('data-service');
-      const serviceId = this.getAttribute('data-service-id');
-      const price = this.getAttribute('data-price');
-      const unit = this.getAttribute('data-unit');
-      
-      if (!auth.currentUser) {
-        showToast('Anda harus login terlebih dahulu', 'error');
-        authModal.style.display = 'flex';
-        return;
-      }
-      
-      selectedSmmService = {
-        name: serviceName,
-        id: serviceId,
-        price: parseInt(price),
-        unit: unit
-      };
-      
-      smmTopupTitle.textContent = `Order ${serviceName}`;
-      smmTopupModal.style.display = 'flex';
+        const serviceName = this.getAttribute('data-service');
+        const serviceId = this.getAttribute('data-service-id');
+        const price = this.getAttribute('data-price');
+        const unit = this.getAttribute('data-unit');
+        
+        selectedSmmService = {
+            name: serviceName,
+            id: serviceId,
+            price: parseInt(price),
+            unit: unit
+        };
+        
+        smmTopupTitle.textContent = `Order ${serviceName}`;
+        smmTopupModal.style.display = 'flex';
     });
-  });
+});
 
   // Add payment method selection for game top-up
   document.querySelectorAll('#gameTopupModal .payment-method').forEach(method => {
@@ -3138,11 +3132,10 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   function sendSmmWhatsAppMessage() {
-    // Redirect to WhatsApp
     const message = `Halo, saya ingin order ${selectedSmmService.name}:\n\n` +
                    `- Link/Username: ${smmLink.value}\n` +
                    `- Jumlah: ${smmQuantity.value} ${selectedSmmService.unit}\n` +
-                   `- Harga: Rp ${(selectedSmmService.price * (smmQuantity.value / (selectedSmmService.unit.includes('K') ? 1000 : 1))).toLocaleString()}\n` +
+                   `- Harga: Rp ${(selectedSmmService.price * (smmQuantity.value / (selectedSmmService.unit.includes('K') ? 1000 : 1)).toLocaleString()}\n` +
                    `- Metode pembayaran: ${selectedSmmPaymentMethod}\n\n` +
                    `Silakan konfirmasi pesanan ini. Terima kasih.`;
     
@@ -3151,6 +3144,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     smmTopupModal.style.display = 'none';
     showToast('Pesanan telah dikirim ke WhatsApp', 'success');
+}
     loadAccountInfo(); // Refresh account info
     
     // Reset form
