@@ -1989,7 +1989,7 @@
 </nav>
 
 <script>
-// Initialize Firebase
+  // Initialize Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyA5LfKdQ3ThSh0h0yzwq8htedfYti_hbxQ",
   authDomain: "pediapay-topup.firebaseapp.com",
@@ -2748,22 +2748,28 @@ document.addEventListener('DOMContentLoaded', function() {
   // SMM service buttons
   document.querySelectorAll('.top-up-btn[data-service]').forEach(button => {
     button.addEventListener('click', function() {
-        const serviceName = this.getAttribute('data-service');
-        const serviceId = this.getAttribute('data-service-id');
-        const price = this.getAttribute('data-price');
-        const unit = this.getAttribute('data-unit');
-        
-        selectedSmmService = {
-            name: serviceName,
-            id: serviceId,
-            price: parseInt(price),
-            unit: unit
-        };
-        
-        smmTopupTitle.textContent = `Order ${serviceName}`;
-        smmTopupModal.style.display = 'flex';
+      const serviceName = this.getAttribute('data-service');
+      const serviceId = this.getAttribute('data-service-id');
+      const price = this.getAttribute('data-price');
+      const unit = this.getAttribute('data-unit');
+      
+      if (!auth.currentUser) {
+        showToast('Anda harus login terlebih dahulu', 'error');
+        authModal.style.display = 'flex';
+        return;
+      }
+      
+      selectedSmmService = {
+        name: serviceName,
+        id: serviceId,
+        price: parseInt(price),
+        unit: unit
+      };
+      
+      smmTopupTitle.textContent = `Order ${serviceName}`;
+      smmTopupModal.style.display = 'flex';
     });
-});
+  });
 
   // Add payment method selection for game top-up
   document.querySelectorAll('#gameTopupModal .payment-method').forEach(method => {
@@ -3132,10 +3138,11 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   function sendSmmWhatsAppMessage() {
+    // Redirect to WhatsApp
     const message = `Halo, saya ingin order ${selectedSmmService.name}:\n\n` +
                    `- Link/Username: ${smmLink.value}\n` +
                    `- Jumlah: ${smmQuantity.value} ${selectedSmmService.unit}\n` +
-                   `- Harga: Rp ${(selectedSmmService.price * (smmQuantity.value / (selectedSmmService.unit.includes('K') ? 1000 : 1)).toLocaleString()}\n` +
+                   `- Harga: Rp ${(selectedSmmService.price * (smmQuantity.value / (selectedSmmService.unit.includes('K') ? 1000 : 1))).toLocaleString()}\n` +
                    `- Metode pembayaran: ${selectedSmmPaymentMethod}\n\n` +
                    `Silakan konfirmasi pesanan ini. Terima kasih.`;
     
@@ -3275,8 +3282,8 @@ document.addEventListener('DOMContentLoaded', function() {
       })
       .then(() => {
         authModal.style.display = 'none';
-        authButton.textContent = '💎';
-        showToast('Login berhasil!', 'success');
+        authButton.innerHTML = '<i class="fas fa-gem"></i>';
+showToast('Login berhasil!', 'success');
         notificationBadge.style.display = 'block'; // Show notification badge
       })
       .catch((error) => {
@@ -3333,8 +3340,8 @@ document.addEventListener('DOMContentLoaded', function() {
       .then((userCredential) => {
         // Success
         authModal.style.display = 'none';
-        authButton.textContent = '💎';
-        showToast('Login berhasil!', 'success');
+        authButton.innerHTML = '<i class="fas fa-gem"></i>'; // Ikon Font Awesome 💎
+showToast('Login berhasil!', 'success');
         notificationBadge.style.display = 'block'; // Show notification badge
       })
       .catch((error) => {
@@ -3413,8 +3420,8 @@ document.addEventListener('DOMContentLoaded', function() {
       .then(() => {
         // Success
         authModal.style.display = 'none';
-        authButton.textContent = '💎';
-        showToast('Pendaftaran berhasil!', 'success');
+        authButton.innerHTML = '<i class="fas fa-gem"></i>'; // Ikon Font Awesome 💎
+showToast('Pendaftaran berhasil!', 'success');
         notificationBadge.style.display = 'block'; // Show notification badge
       })
       .catch((error) => {
@@ -3435,8 +3442,8 @@ document.addEventListener('DOMContentLoaded', function() {
     auth.signOut()
       .then(() => {
         accountModal.style.display = 'none';
-        authButton.textContent = '💎';
-        showToast('Anda telah logout', 'success');
+        authButton.innerHTML = '<i class="fas fa-sign-out-alt"></i>'; // Ikon logout
+showToast('Anda telah logout', 'success');
         notificationBadge.style.display = 'none'; // Hide notification badge
       })
       .catch((error) => {
@@ -3545,16 +3552,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Check auth state and persist login
   auth.onAuthStateChanged((user) => {
-    if (user) {
-      authButton.textContent = '💎';
-      loadAccountInfo();
-      // Check for unread notifications
-      notificationBadge.style.display = 'block';
-    } else {
-      authButton.textContent = '💎';
-      notificationBadge.style.display = 'none';
-    }
-  });
+  if (user) {
+    // User is logged in - show diamond icon and load info
+    authButton.innerHTML = '<i class="fas fa-gem"></i>';
+    loadAccountInfo();
+    notificationBadge.style.display = 'block'; // Show notifications
+  } else {
+    // User is logged out - show alternative diamond icon
+    authButton.innerHTML = '<i class="far fa-gem"></i>'; // Regular version
+    notificationBadge.style.display = 'none'; // Hide notifications
+  }
+});
 
   // Persist auth state across page reloads
   auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
